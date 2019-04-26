@@ -113,7 +113,7 @@ public class Player extends GameObjectLiving implements ICollision {
 
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle((int)this.x, (int)this.y, 32, 32);
+		return new Rectangle((int)this.x, (int)this.y, 32, 64);
 	}
 	
 	public Rectangle getBoundingBoxTop() {
