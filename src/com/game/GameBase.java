@@ -86,6 +86,7 @@ public class GameBase extends Canvas implements Runnable {
 				if(red == 255 && green == 0 && blue == 0) {
 					this.addObject(new Enemy(xx * 32, yy * 32, getInstance()));
 				}
+				if(red == 0 && green == 255 && blue == 0) block(new Block(xx * 32, yy * 32, getInstance(), false));
 			}
 		}
 	}

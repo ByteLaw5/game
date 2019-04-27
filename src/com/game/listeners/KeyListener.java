@@ -11,10 +11,11 @@ public class KeyListener extends KeyAdapter {
 	Player player;
 	
 	/** The actual keycodes are the ones shown below +1.
-	 * 82 = S;
-	 * 86 = W;
-	 * 64 = A;
-	 * 67 = D;
+	 * 82 = S
+	 * 86 = W
+	 * 64 = A
+	 * 67 = D
+	 * 32 = Space
 	 */
 	public boolean[] keysPressed;
 	private boolean A = false, D = false;
@@ -28,7 +29,7 @@ public class KeyListener extends KeyAdapter {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
-		if(key == KeyEvent.VK_W && player.onGround()) {
+		if((key == KeyEvent.VK_W || key == KeyEvent.VK_SPACE) && player.onGround()) {
 			player.setVely(-10.0f);
 			player.setJumping(true);
 			keysPressed[86] = true;

@@ -13,7 +13,7 @@ public class Player extends GameObjectLiving implements ICollision {
 	
 	public Player(float x, float y, GameBase game) {
 		super(x, y, ID.Player, game, true, true);
-		this.health = 100;
+		health = getMaxHealth();
 	}
 	
 	@Override
@@ -78,7 +78,7 @@ public class Player extends GameObjectLiving implements ICollision {
 	
 	public void checkCollisions() {
 		for(GameObject object : GameBase.OBJECTS) {
-			if(object.getId() == ID.Block) {
+			if(object.getId() == ID.Block && ((Block)object).getCollidable()) {
 				if(this.getBoundingBoxTop().intersects(object.getBoundingBox())) {
 					this.y = object.getY() + (this.getBoundingBox().height / 2);
 					this.vely = 0;

@@ -14,7 +14,7 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 	public boolean isDead = false;
 	protected int maxHealth = this.getMaxHealth(), health = this.getHealth();
 	protected float velx, vely;
-	protected float gravity = 0.25f;
+	protected float gravity = 0.5F;
 	protected final float MAX_SPEED = 10.0f;
 	private boolean showHealthBar = false;
 	private boolean showBar;
