@@ -8,8 +8,6 @@ import com.game.util.ICollision;
 import com.game.util.ID;
 
 public class Player extends GameObjectLiving implements ICollision {
-	protected boolean falling = true, jumping = false;
-	
 	public Player(float x, float y, GameBase game) {
 		super(x, y, ID.Player, game, true);
 		health = getMaxHealth();
@@ -18,20 +16,6 @@ public class Player extends GameObjectLiving implements ICollision {
 	@Override
 	public void tick() {
 		super.tick();
-		
-		x += velx;
-		y += vely;
-		
-		if(falling || jumping) {
-			vely += gravity;
-			
-			if(vely > MAX_SPEED) {
-				vely = MAX_SPEED;
-			}
-		}
-		if(vely > 0) {
-			this.setFalling(true);
-		}
 		checkCollisions();
 	}
 	
@@ -48,14 +32,6 @@ public class Player extends GameObjectLiving implements ICollision {
 //		g2d.draw(getBoundingBoxLeft());
 //		g2d.draw(getBoundingBoxRight());
 //		g2d.draw(getBoundingBoxTop());
-	}
-	
-	public boolean inAir() {
-		return this.isFalling() && this.isJumping();
-	}
-	
-	public boolean onGround() {
-		return !this.inAir();
 	}
 	
 	@Override
@@ -127,21 +103,5 @@ public class Player extends GameObjectLiving implements ICollision {
 	
 	public Rectangle getBoundingBoxLeft() {
 		return new Rectangle((int)this.x, (int)this.y + 5, 5, this.getBoundingBox().height - 10);
-	}
-	
-	public boolean isFalling() {
-		return falling;
-	}
-
-	public void setFalling(boolean falling) {
-		this.falling = falling;
-	}
-
-	public boolean isJumping() {
-		return jumping;
-	}
-
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
 	}
 }

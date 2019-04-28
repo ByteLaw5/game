@@ -28,7 +28,8 @@ public class KeyListener extends KeyAdapter {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		
+
+		System.out.println(player.onGround());
 		if((key == KeyEvent.VK_W || key == KeyEvent.VK_SPACE) && player.onGround()) {
 			player.setVely(-10.0f);
 			player.setJumping(true);

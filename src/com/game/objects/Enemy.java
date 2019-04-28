@@ -5,11 +5,13 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.game.GameBase;
+import com.game.ai.AIType;
+import com.game.ai.EnemyAI;
+import com.game.ai.IHasAI;
 import com.game.util.ICollision;
 import com.game.util.ID;
 
 public class Enemy extends GameObjectLiving implements ICollision {
-	protected boolean falling = true;
 	protected int ticksLeft = 0;
 	
 	public Enemy(float x, float y, GameBase game) {
@@ -19,20 +21,6 @@ public class Enemy extends GameObjectLiving implements ICollision {
 	@Override
 	public void tick() {
 		super.tick();
-		
-		x += velx;
-		y += vely;
-		
-		if(falling) {
-			vely += gravity;
-			
-			if(vely > MAX_SPEED) {
-				vely = MAX_SPEED;
-			}
-		}
-		if(vely > 0) {
-			this.setFalling(true);
-		}
 		
 		checkCollisions();
 		initAI();
@@ -50,24 +38,17 @@ public class Enemy extends GameObjectLiving implements ICollision {
 	public int getMaxHealth() {
 		return 40;
 	}
-	
-	protected void initAI() {
-		for(GameObject object : GameBase.OBJECTS) {
-			if(object.getId() == ID.Player) {
-				Player player = (Player)object;
-				if(player.health > 0) {
-					if(this.x > player.x) {
-						this.velx = -1.5f;
-					} else if(this.x < player.x) {
-						this.velx = 1.5f;
-					} else if(this.x == player.x) {
-						this.velx = 0.0f;
-					}
-				} else {
-					this.velx = 0.0f;
-				}
-			}
+
+	protected void appendAI(IHasAI ai, AIType type) {
+		switch(type) {
+			case Looped:
+				for(GameObject object : GameBase.OBJECTS) ai.onInit(this, object);
+				break;
 		}
+	}
+
+	protected void initAI() {
+		appendAI(new EnemyAI(), AIType.Looped);
 	}
 	
 	@Override
@@ -124,13 +105,5 @@ public class Enemy extends GameObjectLiving implements ICollision {
 	@Override
 	public Rectangle getBoundingBoxLeft() {
 		return new Rectangle((int)this.x, (int)this.y + 5, 5, this.getBoundingBox().height - 10);
-	}
-	
-	public boolean isFalling() {
-		return falling;
-	}
-	
-	public void setFalling(boolean falling) {
-		this.falling = falling;
 	}
 }

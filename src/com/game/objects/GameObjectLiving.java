@@ -5,7 +5,7 @@ import java.awt.*;
 import com.game.GameBase;
 import com.game.util.*;
 
-public abstract class GameObjectLiving extends GameObject implements IHealth, IMoveable {
+public abstract class GameObjectLiving extends GameObject implements IHealth, IMoveable, ICollision {
 	public boolean isDead = false;
 	protected int maxHealth = this.getMaxHealth(), health = this.getHealth();
 	protected float velx, vely;
@@ -13,6 +13,7 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 	protected final float MAX_SPEED = 10.0f;
 	private boolean showHealthBar = false;
 	private boolean showBar;
+	protected boolean falling = true, jumping = false;
 	
 	protected GameObjectLiving(float x, float y, ID id, GameBase game, boolean show) {
 		super(x, y, id, game);
@@ -44,6 +45,19 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 			this.die();
 		}
 		ticks++;
+		x += velx;
+		y += vely;
+
+		if(falling || jumping) {
+			vely += gravity;
+
+			if(vely > MAX_SPEED) {
+				vely = MAX_SPEED;
+			}
+		}
+		if(vely > 0) {
+			this.setFalling(true);
+		}
 	}
 	
 	private void checkHealth() {
@@ -117,5 +131,48 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 			this.setVely(strength);
 			this.setVelx(strength);
 		} else this.setVely(strength);
+	}
+	public boolean isFalling() {
+		return falling;
+	}
+
+	public void setFalling(boolean falling) {
+		this.falling = falling;
+	}
+
+	public boolean isJumping() {
+		return jumping;
+	}
+
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
+
+	public boolean inAir() {
+		return this.isFalling() && this.isJumping();
+	}
+
+	public boolean onGround() {
+		return !this.inAir();
+	}
+
+	@Override
+	public Rectangle getBoundingBoxTop() {
+		return new Rectangle((int)((int)x + (this.getBoundingBox().width / 2) - ((this.getBoundingBox().width / 2) / 2)), (int)y, this.getBoundingBox().width / 2, this.getBoundingBox().height / 2);
+	}
+
+	@Override
+	public Rectangle getBoundingBoxDown() {
+		return new Rectangle((int)((int)x + (this.getBoundingBox().width / 2) - ((this.getBoundingBox().width / 2) / 2)), (int)((int)y + (this.getBoundingBox().height / 2)), this.getBoundingBox().width / 2, this.getBoundingBox().height / 2);
+	}
+
+	@Override
+	public Rectangle getBoundingBoxRight() {
+		return new Rectangle((int)((int)x + this.getBoundingBox().width - 5), (int)this.y + 5, 5, this.getBoundingBox().height - 10);
+	}
+
+	@Override
+	public Rectangle getBoundingBoxLeft() {
+		return new Rectangle((int)this.x, (int)this.y + 5, 5, this.getBoundingBox().height - 10);
 	}
 }
