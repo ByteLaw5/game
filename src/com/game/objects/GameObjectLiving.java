@@ -13,18 +13,12 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 	protected final float MAX_SPEED = 10.0f;
 	private boolean showHealthBar = false;
 	private boolean showBar;
-	//private boolean showHealth = false;
 	
 	protected GameObjectLiving(float x, float y, ID id, GameBase game, boolean show) {
 		super(x, y, id, game);
 		this.health = this.getMaxHealth();
 		showBar = show;
 	}
-	
-	/*protected GameObjectLiving(float x, float y, ID id, GameBase game, boolean show, boolean health) {
-		this(x, y, id, game, show);
-		//showHealth = health;
-	}*/
 
 	@Override
 	public void render(Graphics g) {
@@ -41,9 +35,6 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 
 			this.game.drawMessage(g2d, String.format("%s / %s", this.getHealth(), this.getMaxHealth()), (int)this.x - 40, (int)this.y - 33);
 		}
-		/*if(showHealth) {
-			this.game.drawMessage(g2d, String.format("%s / %d", this.getHealth(), this.getMaxHealth()), (int)this.x - 40, (int)this.y - 33);
-		}*/
 	}
 	
 	@Override
@@ -60,7 +51,6 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 			this.health = maxHealth;
 		} else if(this.health < this.maxHealth) {
 			this.showHealthBar = true;
-			//this.showHealth = true;
 		}
 		if(this.health <= 0) {
 			this.die();
