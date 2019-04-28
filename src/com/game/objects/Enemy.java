@@ -11,6 +11,7 @@ import com.game.util.ID;
 public class Enemy extends GameObjectLiving implements ICollision {
 	protected float velx = 0, vely = 0;
 	protected boolean falling = true;
+	protected int ticksLeft = 0;
 	
 	public Enemy(float x, float y, GameBase game) {
 		super(x, y, ID.Enemy, game, true);
@@ -36,6 +37,7 @@ public class Enemy extends GameObjectLiving implements ICollision {
 		
 		checkCollisions();
 		initAI();
+		if(ticksLeft > 0) ticksLeft -= 1;
 	}
 	
 	@Override
@@ -95,6 +97,12 @@ public class Enemy extends GameObjectLiving implements ICollision {
 				if(this.getBoundingBoxLeft().intersects(object.getBoundingBox())) {
 					this.x = object.getX() + 32;
 				}
+			} else if(object.getId() == ID.Player && this.getBoundingBox().intersects(object.getBoundingBox()) && ticksLeft == 0) {
+				Player player = (Player)object;
+				player.hit(10, this);
+				ticksLeft = 50; // Ticks left for another hit
+				player.setJumping(true);
+				player.setVely(-6F);
 			}
 		}
 	}

@@ -64,6 +64,8 @@ public class GameBase extends Canvas implements Runnable {
 		addLevel(level);
 		
 		this.addKeyListener(new KeyListener(player));
+
+		this.drawMessage((Graphics2D)this.getGraphics(), "", 0, 0);
 	}
 	
 	private void addLevel(BufferedImage level) {

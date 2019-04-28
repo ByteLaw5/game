@@ -12,7 +12,7 @@ public class Player extends GameObjectLiving implements ICollision {
 	protected boolean falling = true, jumping = false;
 	
 	public Player(float x, float y, GameBase game) {
-		super(x, y, ID.Player, game, true, true);
+		super(x, y, ID.Player, game, true);
 		health = getMaxHealth();
 	}
 	
@@ -33,7 +33,6 @@ public class Player extends GameObjectLiving implements ICollision {
 		if(vely > 0) {
 			this.setFalling(true);
 		}
-			
 		checkCollisions();
 	}
 	
@@ -98,11 +97,11 @@ public class Player extends GameObjectLiving implements ICollision {
 					this.x = object.getX() + 32;
 				}
 			}
-			if(object.getId() == ID.Enemy) {
+			/*if(object.getId() == ID.Enemy) {
 				if(this.getBoundingBox().intersects(object.getBoundingBox())) {
-					this.health--;
+					health--;
 				}
-			}
+			}*/
 		}
 	}
 	
