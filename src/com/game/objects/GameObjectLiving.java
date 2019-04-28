@@ -14,6 +14,7 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 	private boolean showHealthBar = false;
 	private boolean showBar;
 	protected boolean falling = true, jumping = false;
+	protected int knockTicks = 0, ticksLeft = 0;
 	
 	protected GameObjectLiving(float x, float y, ID id, GameBase game, boolean show) {
 		super(x, y, id, game);
@@ -47,6 +48,7 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 		ticks++;
 		x += velx;
 		y += vely;
+		if(ticksLeft > 0) ticksLeft -= 1;
 
 		if(falling || jumping) {
 			vely += gravity;
@@ -58,8 +60,13 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 		if(vely > 0) {
 			this.setFalling(true);
 		}
+		if(knockTicks - 1 == 0) setVelx(0);
+		if(knockTicks > 0) knockTicks--;
+		checkCollisions();
 	}
-	
+
+	public abstract void checkCollisions();
+
 	private void checkHealth() {
 		if(this.health >= this.maxHealth) {
 			this.health = maxHealth;
@@ -127,9 +134,11 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 		if(dir == Direction.DOWN_LEFT || dir == Direction.LEFT || dir == Direction.UP_LEFT) {
 			this.setVely(strength);
 			this.setVelx(-strength);
+			knockTicks = 30;
 		} else if(dir == Direction.DOWN_RIGHT || dir == Direction.RIGHT || dir == Direction.UP_RIGHT) {
 			this.setVely(strength);
 			this.setVelx(strength);
+			knockTicks = 30;
 		} else this.setVely(strength);
 	}
 	public boolean isFalling() {
@@ -175,4 +184,12 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 	public Rectangle getBoundingBoxLeft() {
 		return new Rectangle((int)this.x, (int)this.y + 5, 5, this.getBoundingBox().height - 10);
 	}
+
+	public int getTickLeft() {
+		return ticksLeft;
+	}
+	public int setTickLeft(int v) {
+		return ticksLeft = v;
+	}
+
 }

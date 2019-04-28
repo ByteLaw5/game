@@ -12,8 +12,7 @@ import com.game.util.ICollision;
 import com.game.util.ID;
 
 public class Enemy extends GameObjectLiving implements ICollision {
-	protected int ticksLeft = 0;
-	
+	public static final EnemyAI ENEMY_AI = new EnemyAI();
 	public Enemy(float x, float y, GameBase game) {
 		super(x, y, ID.Enemy, game, true);
 	}
@@ -21,10 +20,7 @@ public class Enemy extends GameObjectLiving implements ICollision {
 	@Override
 	public void tick() {
 		super.tick();
-		
-		checkCollisions();
 		initAI();
-		if(ticksLeft > 0) ticksLeft -= 1;
 	}
 	
 	@Override
@@ -48,7 +44,7 @@ public class Enemy extends GameObjectLiving implements ICollision {
 	}
 
 	protected void initAI() {
-		appendAI(new EnemyAI(), AIType.Looped);
+		appendAI(ENEMY_AI, AIType.Looped);
 	}
 	
 	@Override
@@ -57,35 +53,7 @@ public class Enemy extends GameObjectLiving implements ICollision {
 	}
 
 	@Override
-	public void checkCollisions() {
-		for(GameObject object : GameBase.OBJECTS) {
-			if(object.getId() == ID.Block) {
-				if(this.getBoundingBoxTop().intersects(object.getBoundingBox())) {
-					this.y = object.getY() + (this.getBoundingBox().height / 2);
-					this.vely = 0;
-				}
-				if(this.getBoundingBoxDown().intersects(object.getBoundingBox())) {
-					this.y = object.getY() - this.getBoundingBox().height;
-					this.vely = 0;
-					this.falling = false;
-				} else {
-					this.falling = true;
-				}
-				if(this.getBoundingBoxRight().intersects(object.getBoundingBox())) {
-					this.x = object.getX() - 32;
-				}
-				if(this.getBoundingBoxLeft().intersects(object.getBoundingBox())) {
-					this.x = object.getX() + 32;
-				}
-			} else if(object.getId() == ID.Player && this.getBoundingBox().intersects(object.getBoundingBox()) && ticksLeft == 0) {
-				Player player = (Player)object;
-				player.hit(10, this);
-				ticksLeft = 50; // Ticks left for another hit
-				player.setJumping(true);
-				player.setVely(-6F);
-			}
-		}
-	}
+	public void checkCollisions() {};
 
 	@Override
 	public Rectangle getBoundingBoxTop() {
