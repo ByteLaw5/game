@@ -11,10 +11,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import com.game.listeners.KeyListener;
-import com.game.objects.Block;
-import com.game.objects.Enemy;
-import com.game.objects.GameObject;
-import com.game.objects.Player;
+import com.game.objects.*;
 import com.game.util.BufferedImageLoader;
 import com.game.util.ID;
 import com.game.util.IHasPlace;
@@ -87,6 +84,9 @@ public class GameBase extends Canvas implements Runnable {
 				}
 				if(red == 255 && green == 0 && blue == 0) {
 					this.addObject(new Enemy(xx * 32, yy * 32, getInstance()));
+				}
+				if(red == 255 && green == 0 && blue == 100) {
+					this.addObject(new ShootingEnemy(xx * 32, yy * 32, getInstance()));
 				}
 				if(red == 0 && green == 255 && blue == 0) block(new Block(xx * 32, yy * 32, getInstance(), false));
 			}

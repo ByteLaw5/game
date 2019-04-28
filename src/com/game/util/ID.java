@@ -7,7 +7,8 @@ public enum ID {
 	Player(1),
 	Block(2),
 	Enemy(3),
-	Bullet(4);
+	Bullet(4),
+	EnemyShooting(5);
 	
 	private int id;
 	

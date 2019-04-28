@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import com.game.GameBase;
 import com.game.GameBase.ObjectDoesNotExistException;
+import com.game.util.Direction;
 import com.game.util.ID;
 import com.game.util.IHasPlace;
 
@@ -14,7 +15,7 @@ import com.game.util.IHasPlace;
 public abstract class GameObject implements IHasPlace {
 	protected float x, y;
 	protected ID id;
-	protected GameBase game;
+	public GameBase game;
 	protected int ticks;
 	
 	public GameObject(float x, float y, ID id, GameBase game) {
@@ -53,6 +54,18 @@ public abstract class GameObject implements IHasPlace {
 			this.game.removeObject(this);
 		} catch (ObjectDoesNotExistException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public Direction facing(GameObject from, GameObject to) {
+		if(from.x > to.x) {
+			return Direction.LEFT;
+		} else if(from.x < to.x) {
+			return Direction.RIGHT;
+		} else if(from.x == to.x) {
+			return Direction.NONE;
+		} else {
+			return Direction.NONE;
 		}
 	}
 }
