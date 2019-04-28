@@ -1,10 +1,9 @@
 package com.game.objects;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 
 import com.game.GameBase;
+import com.game.util.Assets;
 import com.game.util.ICollision;
 import com.game.util.ID;
 
@@ -41,8 +40,7 @@ public class Player extends GameObjectLiving implements ICollision {
 		super.render(g);
 		
 		if(this.health > 0) {
-			g.setColor(Color.BLACK);
-			g.fillRect(this.getBoundingBox().x, this.getBoundingBox().y, this.getBoundingBox().width, this.getBoundingBox().height);
+			g.drawImage(Assets.player, (int)x, (int)y, null);
 		}
 //		Graphics2D g2d = (Graphics2D)g;
 //		g2d.setColor(Color.BLUE);

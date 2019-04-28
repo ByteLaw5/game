@@ -1,12 +1,11 @@
 package com.game.objects;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-
 import com.game.GameBase;
+import com.game.util.Assets;
 import com.game.util.ID;
 import com.game.util.IHasPlace;
+
+import java.awt.*;
 
 public class Block extends GameObject implements IHasPlace {
 	protected boolean canCollide = true;
@@ -30,10 +29,7 @@ public class Block extends GameObject implements IHasPlace {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(getCollidable() ? Color.RED : Color.GREEN);
-		g.fillRect(this.getBoundingBox().x, this.getBoundingBox().y, this.getBoundingBox().width, this.getBoundingBox().height);
-		g.setColor(Color.BLACK);
-		g.drawRect(this.getBoundingBox().x, this.getBoundingBox().y, this.getBoundingBox().width, this.getBoundingBox().height);
+		g.drawImage(getCollidable() ? Assets.block : Assets.block_notcollide, (int)x, (int)y, null);
 	}
 
 	@Override

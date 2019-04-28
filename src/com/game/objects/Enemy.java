@@ -9,7 +9,6 @@ import com.game.util.ICollision;
 import com.game.util.ID;
 
 public class Enemy extends GameObjectLiving implements ICollision {
-	protected float velx = 0, vely = 0;
 	protected boolean falling = true;
 	protected int ticksLeft = 0;
 	
