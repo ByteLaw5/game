@@ -3,6 +3,7 @@ package com.game.objects;
 import com.game.GameBase;
 import com.game.ai.AIType;
 import com.game.ai.ShootingEnemyAI;
+import com.game.ai.ShootingEnemyAIWalk;
 import com.game.util.ID;
 
 public class ShootingEnemy extends Enemy {
@@ -22,5 +23,6 @@ public class ShootingEnemy extends Enemy {
             appendAI(new ShootingEnemyAI(), AIType.Looped);
             ticksLeft = 200;
         }
+        appendAI(new ShootingEnemyAIWalk(), AIType.Looped);
     }
 }

@@ -16,6 +16,7 @@ import com.game.objects.*;
 import com.game.util.BufferedImageLoader;
 import com.game.util.ID;
 import com.game.util.IHasPlace;
+import com.game.util.SoundEngine;
 
 public class GameBase extends Canvas implements Runnable {
 	private static final long serialVersionUID = -7501386080343782626L;
@@ -43,6 +44,7 @@ public class GameBase extends Canvas implements Runnable {
 	
 	private boolean running = false;
 	private Thread thread;
+	private SoundEngine se;
 	
 	private Camera cam;
 	
@@ -56,7 +58,9 @@ public class GameBase extends Canvas implements Runnable {
 		level = loader.loadImage("/res/level.png");
 		
 		instance = this;
-		
+
+		se = new SoundEngine();
+		se.load();
 		cam = new Camera(0, 0);
 		
 		addLevel(level);
@@ -222,6 +226,10 @@ public class GameBase extends Canvas implements Runnable {
 	
 	public GameBase getInstance() {
 		return instance;
+	}
+
+	public SoundEngine getSoundEngine() {
+		return se;
 	}
 	
 	public Player getPlayer() {

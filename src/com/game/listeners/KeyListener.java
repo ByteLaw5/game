@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 import com.game.objects.Player;
 import com.game.util.IsListener;
+import com.game.util.Sounds;
 
 @IsListener("key")
 public class KeyListener extends KeyAdapter {
@@ -33,6 +34,9 @@ public class KeyListener extends KeyAdapter {
 			player.setVely(-10.0f);
 			player.setJumping(true);
 			keysPressed[86] = true;
+			if(!Sounds.test_ogg.playing()) {
+				Sounds.test_ogg.play();
+			}
 		}
 		if(key == KeyEvent.VK_A)
 			player.setVelx(-5.0f); keysPressed[64] = true; A = true;

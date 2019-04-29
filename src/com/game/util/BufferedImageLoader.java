@@ -18,7 +18,6 @@ public class BufferedImageLoader {
 	}
 
 	public BufferedImage crop(BufferedImage image, int col, int row, int width, int height) {
-		BufferedImage img = image.getSubimage((col * width) - width, (row * height) - height, width, height);
-		return img;
+		return image.getSubimage((col * width) - width, (row * height) - height, width, height);
 	}
 }

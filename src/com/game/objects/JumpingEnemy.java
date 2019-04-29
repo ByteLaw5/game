@@ -1,13 +1,32 @@
 package com.game.objects;
 
 import com.game.GameBase;
+import com.game.ai.AIType;
+import com.game.ai.JumpingEnemyAI;
 import com.game.util.ID;
 
 public class JumpingEnemy extends Enemy {
     public boolean hasTouched = false;
+    private float maxspeed = 3f;
 
     public JumpingEnemy(float x, float y, GameBase game) {
         super(x, y, game);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if(velx > maxspeed) {
+            velx = maxspeed;
+        } else if(velx < -maxspeed) {
+            velx = -maxspeed;
+        }
+    }
+
+    @Override
+    protected void initAI() {
+        appendAI(new JumpingEnemyAI(), AIType.Looped);
     }
 
     @Override
@@ -18,9 +37,9 @@ public class JumpingEnemy extends Enemy {
     private void jump() {
         this.vely = -7.0f;
         if(velx > 0) {
-            velx -= 3;
+            velx -= 4f;
         } else {
-            velx += 3;
+            velx += 4f;
         }
         this.setJumping(true);
     }
