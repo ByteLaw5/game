@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import com.game.listeners.KeyListener;
@@ -87,6 +88,9 @@ public class GameBase extends Canvas implements Runnable {
 				}
 				if(red == 255 && green == 0 && blue == 100) {
 					this.addObject(new ShootingEnemy(xx * 32, yy * 32, getInstance()));
+				}
+				if(red == 255 && green == 100 && blue == 0) {
+					this.addObject(new JumpingEnemy(xx * 32, yy * 32, getInstance()));
 				}
 				if(red == 0 && green == 255 && blue == 0) block(new Block(xx * 32, yy * 32, getInstance(), false));
 			}
@@ -215,6 +219,14 @@ public class GameBase extends Canvas implements Runnable {
 	public void drawMessage(Graphics2D g2d, Object message, int x, int y) {
 		this.drawMessage(g2d, message, new Font("Purisa", Font.PLAIN, 25), Color.BLACK, x, y);
 	}
+
+	public boolean isOccupied(int x, int y) {
+		for (GameObject object : OBJECTS) {
+			System.out.println((int)object.getX() == x && (int)object.getY() == y);
+			return (int) object.getX() == x && (int) object.getY() == y;
+		}
+		return false;
+	}
 	
 	public GameBase getInstance() {
 		return instance;
@@ -230,11 +242,7 @@ public class GameBase extends Canvas implements Runnable {
 	
 	public static class ObjectDoesNotExistException extends IndexOutOfBoundsException {
 		private static final long serialVersionUID = 1L;
-		
-		public ObjectDoesNotExistException() {
-			super();
-		}
-		
+
 		public ObjectDoesNotExistException(String cause) {
 			super(cause);
 		}

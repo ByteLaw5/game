@@ -8,11 +8,12 @@ public enum ID {
 	Block(2),
 	Enemy(3),
 	Bullet(4),
-	EnemyShooting(5);
+	EnemyShooting(5),
+	EnemyJumping(6);
 	
 	private int id;
 	
-	private ID(int id) {
+	ID(int id) {
 		this.id = id;
 	}
 	

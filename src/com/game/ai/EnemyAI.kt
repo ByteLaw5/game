@@ -11,9 +11,9 @@ class EnemyAI : IHasAI {
             val player = obj as Player
             if(player.health > 0) {
                 when {
-                    living.x > player.x -> living.velx = -1.5f
-                    living.x < player.x -> living.velx = 1.5f
-                    living.x == player.x -> living.velx = 0.0f
+                    living.x > player.x && living.velx > -1.5f -> living.velx += -0.44f
+                    living.x < player.x && living.velx < 1.5f ->  living.velx += 0.44f
+                    living.x.toInt() == player.x.toInt() -> living.velx = 0.0f
                 }
             } else {
                 living.velx = 0.0f
