@@ -23,20 +23,20 @@ public class Bullet extends GameObject implements IMoveable, ICollision {
     private void switchDirections() {
         switch(direction) {
             case LEFT:
-                this.setVelx(-6F);
+                this.setVelx(-4.0f);
                 break;
             case RIGHT:
-                this.setVelx(6F);
+                this.setVelx(4.0f);
                 break;
             case DOWN:
-                this.setVely(-6F);
+                this.setVely(-4.0f);
                 break;
             case UP:
-                this.setVely(6F);
+                this.setVely(4.0f);
                 break;
             case NONE:
-                this.setVelx(0F);
-                this.setVely(0F);
+                this.setVelx(0.0f);
+                this.setVely(0.0f);
                 break;
         }
     }

@@ -6,7 +6,6 @@ import com.game.ai.ShootingEnemyAI;
 import com.game.util.ID;
 
 public class ShootingEnemy extends Enemy {
-    public static final ShootingEnemyAI SHOOTING_ENEMY_AI = new ShootingEnemyAI();
     public ShootingEnemy(float x, float y, GameBase game) {
         super(x, y, game);
         this.ticksLeft = 200;
@@ -20,7 +19,7 @@ public class ShootingEnemy extends Enemy {
     @Override
     protected void initAI() {
         if(ticksLeft == 0) {
-            appendAI(SHOOTING_ENEMY_AI, AIType.Looped);
+            appendAI(new ShootingEnemyAI(), AIType.Looped);
             ticksLeft = 200;
         }
     }

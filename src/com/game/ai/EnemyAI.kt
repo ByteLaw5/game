@@ -19,34 +19,9 @@ class EnemyAI : IHasAI {
                 living.velx = 0.0f
             }
         }
-        if (obj.id == ID.Block) {
-            if (living.boundingBoxTop.intersects(obj.boundingBox)) {
-                living.y = obj.y + living.boundingBox.height / 2
-                living.vely = 0f
-            }
-            if (living.boundingBoxDown.intersects(obj.getBoundingBox())) {
-                living.y = obj.y - living.boundingBox.height
-                living.vely = 0f
-                living.setFalling(false)
-            } else {
-                living.setFalling(true)
-            }
-            if (living.boundingBoxRight.intersects(obj.boundingBox)) {
-                living.x = obj.x - 32
-                living.vely = -10f
-                living.setJumping(true)
-            }
-            if (living.boundingBoxLeft.intersects(obj.boundingBox)) {
-                living.x = obj.x + 32
-                living.vely = -10f
-                living.setJumping(true)
-            }
-        } else if (obj.id == ID.Player && living.boundingBox.intersects(obj.boundingBox) && living.tickLeft == 0) {
-            val player = obj as Player
-            player.hit(10, living)
-            living.tickLeft = 50 // Ticks left for another hit
-            player.isJumping = true
-            player.vely = -6f
-        }
+        /*else if(obj.id == ID.Block && (living.boundingBoxLeft.intersects(obj.boundingBox) || living.boundingBoxRight.intersects(obj.boundingBox))) {
+            living.vely = -10.0f
+            living.setJumping(true)
+        }*/
     }
 }
