@@ -219,14 +219,6 @@ public class GameBase extends Canvas implements Runnable {
 	public void drawMessage(Graphics2D g2d, Object message, int x, int y) {
 		this.drawMessage(g2d, message, new Font("Purisa", Font.PLAIN, 25), Color.BLACK, x, y);
 	}
-
-	public boolean isOccupied(int x, int y) {
-		for (GameObject object : OBJECTS) {
-			System.out.println((int)object.getX() == x && (int)object.getY() == y);
-			return (int) object.getX() == x && (int) object.getY() == y;
-		}
-		return false;
-	}
 	
 	public GameBase getInstance() {
 		return instance;
