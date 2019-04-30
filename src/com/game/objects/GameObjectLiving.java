@@ -45,7 +45,6 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 		if(this.y >= GameBase.HEIGHT) {
 			this.die();
 		}
-		ticks++;
 
 		if(knockTickLeft - 1 == 0) setVelx(0);
 		if(knockTickLeft > 0) knockTickLeft--;

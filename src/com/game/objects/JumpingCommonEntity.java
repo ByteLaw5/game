@@ -35,7 +35,8 @@ import com.game.util.ID;
         return ID.EnemyJumping;
     }
 
-    private void jump() {
+    @Override
+    protected void jump() {
         this.vely = -7.0f;
         if(velx > 0) {
             velx -= 4f;

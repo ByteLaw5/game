@@ -146,6 +146,7 @@ public class GameBase extends Canvas implements Runnable {
 	private void tick() {
 		for(GameObject object : OBJECTS) {
 			object.tick();
+			object.ticks++;
 			cam.tick(player);
 		}
 		OBJECTS.addAll(ON_WAIT);
@@ -238,7 +239,7 @@ public class GameBase extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		new Window(900, 600, "Game", new GameBase());
+		new Window(900, 600, "Undead Residence Alpha 0.1v", new GameBase());
 	}
 	
 	public static class ObjectDoesNotExistException extends IndexOutOfBoundsException {

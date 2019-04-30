@@ -9,6 +9,7 @@ import com.game.ai.AIType;
 import com.game.ai.EnemyAI;
 import com.game.ai.IHasAI;
 import com.game.ai.JumpAI;
+import com.game.objects.Block;
 import com.game.objects.GameObject;
 import com.game.objects.GameObjectLiving;
 import com.game.objects.Player;
@@ -66,22 +67,24 @@ public abstract class CommonEntity extends GameObjectLiving implements ICollisio
 	public void checkCollisions() {
 		for(GameObject object : GameBase.OBJECTS) {
 			if(object.getId() == ID.Block) {
-				if(this.getBoundingBoxTop().intersects(object.getBoundingBox())) {
+				if(this.getBoundingBoxTop().intersects(object.getBoundingBox()) && ((Block)object).getCollidable()) {
 					this.y = object.getY() + (this.getBoundingBox().height / 2);
 					this.vely = 0;
 				}
-				if(this.getBoundingBoxDown().intersects(object.getBoundingBox())) {
+				if(this.getBoundingBoxDown().intersects(object.getBoundingBox()) && ((Block)object).getCollidable()) {
 					this.y = object.getY() - this.getBoundingBox().height;
 					this.vely = 0;
 					this.falling = false;
 				} else {
 					this.falling = true;
 				}
-				if(this.getBoundingBoxRight().intersects(object.getBoundingBox())) {
+				if(this.getBoundingBoxRight().intersects(object.getBoundingBox()) && ((Block)object).getCollidable()) {
 					this.x = object.getX() - 32;
+					this.jump();
 				}
-				if(this.getBoundingBoxLeft().intersects(object.getBoundingBox())) {
+				if(this.getBoundingBoxLeft().intersects(object.getBoundingBox()) && ((Block)object).getCollidable()) {
 					this.x = object.getX() + 32;
+					this.jump();
 				}
 			} else if(object.getId() == ID.Player && this.getBoundingBox().intersects(object.getBoundingBox()) && ticksLeft == 0) {
 				Player player = (Player)object;
@@ -92,6 +95,17 @@ public abstract class CommonEntity extends GameObjectLiving implements ICollisio
 			}
 		}
 	}
+
+	protected void jump() {
+		this.setJumping(true);
+		this.setVely(-7.0f);
+	}
+
+	protected void jump(float strength) {
+		this.setJumping(true);
+		this.setVely(-strength);
+	}
+
 	@Override
 	public Rectangle getBoundingBoxTop() {
 		return new Rectangle((int)((int)x + (this.getBoundingBox().width / 2) - ((this.getBoundingBox().width / 2) / 2)), (int)y, this.getBoundingBox().width / 2, this.getBoundingBox().height / 2);

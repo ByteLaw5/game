@@ -4,9 +4,6 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +13,17 @@ public class SoundEngine {
 
     public void load() {
         try {
-            sounds.put("test", new Sound("res/sounds/test.ogg"));
+            sounds.put("zombieambient1", new Sound("res/sounds/sndZombie1.ogg"));
+            sounds.put("zombieambient2", new Sound("res/sounds/sndZombie2.ogg"));
+            sounds.put("zombieambient3", new Sound("res/sounds/sndZombie3.ogg"));
+            sounds.put("zombieambient4", new Sound("res/sounds/sndZombie5.ogg"));
+            sounds.put("zombieambient5", new Sound("res/sounds/sndZombie8.ogg"));
+            sounds.put("zombiehit1", new Sound("res/sounds/sndZombie4.ogg"));
+            sounds.put("zombiehit2", new Sound("res/sounds/sndZombie6.ogg"));
+            sounds.put("zombiehit3", new Sound("res/sounds/sndZombie7.ogg"));
+            sounds.put("zombiedeath1", new Sound("res/sounds/sndZombie9.ogg"));
+            sounds.put("zombiedeath2", new Sound("res/sounds/sndZombie10.ogg"));
+            sounds.put("zombiedeath3", new Sound("res/sounds/sndZombie11.ogg"));
         } catch (SlickException e) {
             e.printStackTrace();
         }

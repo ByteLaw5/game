@@ -9,7 +9,8 @@ public enum ID {
 	Enemy(3),
 	Bullet(4),
 	@Deprecated EnemyShooting(5),
-	@Deprecated EnemyJumping(6);
+	@Deprecated EnemyJumping(6),
+	Item(7);
 	
 	private int id;
 	

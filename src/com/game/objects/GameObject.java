@@ -2,6 +2,7 @@ package com.game.objects;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Random;
 
 import com.game.GameBase;
 import com.game.GameBase.ObjectDoesNotExistException;
@@ -16,7 +17,8 @@ public abstract class GameObject implements IHasPlace {
 	protected float x, y;
 	protected ID id;
 	public GameBase game;
-	protected int ticks;
+	public int ticks;
+	protected Random rand = new Random();
 	
 	public GameObject(float x, float y, ID id, GameBase game) {
 		this.x = x;
