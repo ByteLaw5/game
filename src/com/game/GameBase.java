@@ -8,9 +8,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 
+import com.game.entity.CommonEntity;
+import com.game.entity.ZombieEntity;
 import com.game.listeners.KeyListener;
 import com.game.objects.*;
 import com.game.util.BufferedImageLoader;
@@ -88,14 +89,14 @@ public class GameBase extends Canvas implements Runnable {
 					this.addObject(player);
 				}
 				if(red == 255 && green == 0 && blue == 0) {
-					this.addObject(new Enemy(xx * 32, yy * 32, getInstance()));
+					this.addObject(new ZombieEntity(xx * 32, yy * 32, getInstance()));
 				}
-				if(red == 255 && green == 0 && blue == 100) {
-					this.addObject(new ShootingEnemy(xx * 32, yy * 32, getInstance()));
+				/*if(red == 255 && green == 0 && blue == 100) {
+					this.addObject(new ShootingCommonEntity(xx * 32, yy * 32, getInstance()));
 				}
 				if(red == 255 && green == 100 && blue == 0) {
-					this.addObject(new JumpingEnemy(xx * 32, yy * 32, getInstance()));
-				}
+					this.addObject(new JumpingCommonEntity(xx * 32, yy * 32, getInstance()));
+				}*/
 				if(red == 0 && green == 255 && blue == 0) block(new Block(xx * 32, yy * 32, getInstance(), false));
 			}
 		}
@@ -186,7 +187,7 @@ public class GameBase extends Canvas implements Runnable {
 		} else if(index == ID.Block.getId()) {
 			this.addObject(new Block(x, y, getInstance()));
 		} else if(index == ID.Enemy.getId()) {
-			this.addObject(new Enemy(x, y, getInstance()));
+			this.addObject(new ZombieEntity(x, y, getInstance()));
 		}
 	}
 	

@@ -8,8 +8,8 @@ public enum ID {
 	Block(2),
 	Enemy(3),
 	Bullet(4),
-	EnemyShooting(5),
-	EnemyJumping(6);
+	@Deprecated EnemyShooting(5),
+	@Deprecated EnemyJumping(6);
 	
 	private int id;
 	

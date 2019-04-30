@@ -5,7 +5,7 @@ import com.game.objects.GameObjectLiving
 import com.game.objects.Player
 import com.game.util.ID
 
-class JumpingEnemyAI : IHasAI {
+class JumpAI : IHasAI {
     override fun onInit(living: GameObjectLiving, obj: GameObject) {
         if(obj.id == ID.Player) {
             val player = obj as Player

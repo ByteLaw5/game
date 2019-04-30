@@ -14,6 +14,7 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 	private boolean showHealthBar = false;
 	private boolean showBar;
 	protected boolean falling = true, jumping = false;
+	protected int knockTickLeft = 0;
 	
 	protected GameObjectLiving(float x, float y, ID id, GameBase game, boolean show) {
 		super(x, y, id, game);
@@ -45,6 +46,9 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 			this.die();
 		}
 		ticks++;
+
+		if(knockTickLeft - 1 == 0) setVelx(0);
+		if(knockTickLeft > 0) knockTickLeft--;
 		x += velx;
 		y += vely;
 
@@ -127,9 +131,11 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 		if(dir == Direction.DOWN_LEFT || dir == Direction.LEFT || dir == Direction.UP_LEFT) {
 			this.setVely(strength);
 			this.setVelx(-strength);
+			knockTickLeft = 20;
 		} else if(dir == Direction.DOWN_RIGHT || dir == Direction.RIGHT || dir == Direction.UP_RIGHT) {
 			this.setVely(strength);
 			this.setVelx(strength);
+			knockTickLeft = 20;
 		} else this.setVely(strength);
 	}
 	public boolean isFalling() {

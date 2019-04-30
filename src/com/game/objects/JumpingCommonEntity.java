@@ -2,15 +2,16 @@ package com.game.objects;
 
 import com.game.GameBase;
 import com.game.ai.AIType;
-import com.game.ai.JumpingEnemyAI;
+import com.game.ai.JumpAI;
+import com.game.entity.CommonEntity;
 import com.game.util.ID;
 
-public class JumpingEnemy extends Enemy {
+@Deprecated public class JumpingCommonEntity extends CommonEntity {
     public boolean hasTouched = false;
     private float maxspeed = 3f;
 
-    public JumpingEnemy(float x, float y, GameBase game) {
-        super(x, y, game);
+    public JumpingCommonEntity(float x, float y, GameBase game) {
+        super(x, y, 40, 40, game);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class JumpingEnemy extends Enemy {
 
     @Override
     protected void initAI() {
-        appendAI(new JumpingEnemyAI(), AIType.Looped);
+        appendAI(new JumpAI(), AIType.Looped);
     }
 
     @Override

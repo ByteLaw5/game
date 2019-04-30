@@ -71,7 +71,7 @@ public class Player extends GameObjectLiving implements ICollision {
 					this.x = object.getX() + 32;
 				}
 			}
-			/*if(object.getId() == ID.Enemy) {
+			/*if(object.getId() == ID.CommonEntity) {
 				if(this.getBoundingBox().intersects(object.getBoundingBox())) {
 					health--;
 				}

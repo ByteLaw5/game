@@ -4,11 +4,12 @@ import com.game.GameBase;
 import com.game.ai.AIType;
 import com.game.ai.ShootingEnemyAI;
 import com.game.ai.ShootingEnemyAIWalk;
+import com.game.entity.CommonEntity;
 import com.game.util.ID;
 
-public class ShootingEnemy extends Enemy {
-    public ShootingEnemy(float x, float y, GameBase game) {
-        super(x, y, game);
+@Deprecated public class ShootingCommonEntity extends CommonEntity {
+    public ShootingCommonEntity(float x, float y, GameBase game) {
+        super(x, y, 40, 40, game);
         this.ticksLeft = 200;
     }
 

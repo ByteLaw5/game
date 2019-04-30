@@ -1,5 +1,8 @@
 package com.game.ai
 
 enum class AIType {
-    Looped
+    Looped,
+    Timed,
+    TimedLoop,
+    Default
 }
