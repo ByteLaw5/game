@@ -1,6 +1,7 @@
 package com.game.objects;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import com.game.GameBase;
 import com.game.util.Assets;
@@ -9,6 +10,10 @@ import com.game.util.ICollision;
 import com.game.util.ID;
 
 public class Player extends GameObjectLiving implements ICollision {
+	private boolean goBack = false;
+	private int animIndex = 0;
+	private int animTick = 0;
+	private BufferedImage anim = Assets.player[3];
 	public Player(float x, float y, GameBase game) {
 		super(x, y, ID.Player, game, true);
 		health = getMaxHealth();
@@ -25,9 +30,19 @@ public class Player extends GameObjectLiving implements ICollision {
 		super.render(g);
 		int imgX = (int)(looks == Direction.LEFT ? x + 32F : x);
 		int imgWidth = looks == Direction.LEFT ? -32 : 32;
+		if(velx != 0F && animTick == 0) {
+			anim = Assets.player[animIndex];
+			if(animIndex >= 2) goBack = true;
+			else if(animIndex == 0) goBack = false;
+
+			if(goBack) animIndex--;
+			else animIndex++;
+			animTick = 30;
+		} else if(velx == 0F) anim = Assets.player[3];
 		if(this.health > 0) {
-			g.drawImage(Assets.player, imgX, (int)y, imgWidth, 64, null);
+			g.drawImage(anim, imgX, (int)y, imgWidth, 64, null);
 		}
+		if(animTick > 0) animTick--;
 //		Graphics2D g2d = (Graphics2D)g;
 //		g2d.setColor(Color.BLUE);
 //		g2d.draw(getBoundingBoxDown());
