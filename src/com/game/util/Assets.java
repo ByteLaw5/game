@@ -4,9 +4,9 @@ import java.awt.image.BufferedImage;
 
 public class Assets {
     private static BufferedImageLoader loader = new BufferedImageLoader();
-    private static BufferedImage sprite_sheet = loader.loadImage("/res/textures/spritesheet.png");
 
-    public static final BufferedImage player = loader.crop(sprite_sheet, 2, 1, 32, 64);
-    public static final BufferedImage block = loader.crop(sprite_sheet, 1, 1, 32, 32);
-    public static final BufferedImage block_notcollide = loader.crop(sprite_sheet, 3, 1, 32, 32);
+    public static final BufferedImage player = loader.loadImage("/res/textures/mobs/player.png");
+    public static final BufferedImage zombie = loader.loadImage("/res/textures/mobs/zombie.png");
+    public static final BufferedImage block = loader.loadImage("/res/textures/blocks/dirt.png");
+    public static final BufferedImage block_notcollide = loader.loadImage("/res/textures/blocks/dirt0.png");
 }

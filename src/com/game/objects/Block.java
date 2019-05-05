@@ -29,7 +29,7 @@ public class Block extends GameObject implements IHasPlace {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(getCollidable() ? Assets.block : Assets.block_notcollide, (int)x, (int)y, null);
+		g.drawImage(getCollidable() ? Assets.block : Assets.block_notcollide, (int)x, (int)y, 32, 32, null);
 	}
 
 	@Override

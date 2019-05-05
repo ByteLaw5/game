@@ -4,6 +4,7 @@ import java.awt.*;
 
 import com.game.GameBase;
 import com.game.util.Assets;
+import com.game.util.Direction;
 import com.game.util.ICollision;
 import com.game.util.ID;
 
@@ -22,9 +23,10 @@ public class Player extends GameObjectLiving implements ICollision {
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
-		
+		int imgX = (int)(looks == Direction.LEFT ? x + 32F : x);
+		int imgWidth = looks == Direction.LEFT ? -32 : 32;
 		if(this.health > 0) {
-			g.drawImage(Assets.player, (int)x, (int)y, null);
+			g.drawImage(Assets.player, imgX, (int)y, imgWidth, 64, null);
 		}
 //		Graphics2D g2d = (Graphics2D)g;
 //		g2d.setColor(Color.BLUE);
