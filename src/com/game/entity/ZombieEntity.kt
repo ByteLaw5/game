@@ -3,9 +3,12 @@ package com.game.entity
 import com.game.GameBase
 import com.game.ai.AIType
 import com.game.objects.GameObjectLiving
+import com.game.util.Assets
+import com.game.util.Direction
 import com.game.util.Sounds
+import java.awt.Graphics
 
-class ZombieEntity constructor(x: Float, y: Float, game: GameBase): CommonEntity(x, y, 30, 80, game) {
+class ZombieEntity constructor(x: Float, y: Float, game: GameBase): CommonEntity(x, y, 32, 64, game) {
     override fun initAI() {
         appendAI(AI_JUMP, AIType.Looped)
         appendAI(AI_ENEMY, AIType.Looped)
@@ -32,6 +35,15 @@ class ZombieEntity constructor(x: Float, y: Float, game: GameBase): CommonEntity
             0 -> Sounds.zombiedeath1.play(1.0f, 0.15f)
             1 -> Sounds.zombiedeath2.play(1.0f, 0.15f)
             2 -> Sounds.zombiedeath3.play(1.0f, 0.15f)
+        }
+    }
+
+    override fun render(g: Graphics) {
+        super.render(g)
+        val imgX = (if (looks == Direction.LEFT) x + 32f else x).toInt()
+        val imgWidth = if (looks == Direction.LEFT) -32 else 32
+        if (this.health > 0) {
+            g.drawImage(Assets.zombie, imgX, y.toInt(), imgWidth, 64, null)
         }
     }
 

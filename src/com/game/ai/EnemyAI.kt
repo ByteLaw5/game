@@ -5,11 +5,11 @@ import com.game.objects.GameObjectLiving
 import com.game.objects.Player
 import com.game.util.ID
 
-class EnemyAI : IHasAI {
+class EnemyAI: IHasAI {
     override fun onInit(living: GameObjectLiving, obj: GameObject) {
         if (obj.id == ID.Player) {
             val player = obj as Player
-            if(player.health > 0) {
+            if(player.health > 0 && living.nearTo(300F, obj)) {
                 when {
                     living.x > player.x -> living.velx = -1.5f
                     living.x < player.x -> living.velx = 1.5f

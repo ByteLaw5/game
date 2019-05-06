@@ -38,8 +38,8 @@ public abstract class CommonEntity extends GameObjectLiving implements ICollisio
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
-		g.setColor(Color.BLUE);
-		g.fillRect(this.getBoundingBox().x, this.getBoundingBox().y, this.getBoundingBox().width, this.getBoundingBox().height);
+		//g.setColor(Color.BLUE);
+		//g.fillRect(this.getBoundingBox().x, this.getBoundingBox().y, this.getBoundingBox().width, this.getBoundingBox().height);
 	}
 	@Override
 	public int getMaxHealth() {

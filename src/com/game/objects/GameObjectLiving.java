@@ -6,6 +6,7 @@ import com.game.GameBase;
 import com.game.util.*;
 
 public abstract class GameObjectLiving extends GameObject implements IHealth, IMoveable, ICollision {
+	protected Direction looks = Direction.RIGHT;
 	public boolean isDead = false;
 	protected int maxHealth = this.getMaxHealth(), health;
 	protected float velx, vely;
@@ -61,6 +62,8 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 		if(vely > 0) {
 			this.setFalling(true);
 		}
+		if(this.getVelx() < 0F) looks = Direction.LEFT;
+		else if(this.getVelx() > 0F) looks = Direction.RIGHT;
 	}
 	
 	private void checkHealth() {

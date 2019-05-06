@@ -70,4 +70,10 @@ public abstract class GameObject implements IHasPlace {
 			return Direction.NONE;
 		}
 	}
+	public boolean nearTo(float maxPos, GameObject other) {
+		float XDelta = this.x - other.x;
+		float YDelta = this.y - other.y;
+		return XDelta < maxPos && XDelta > -maxPos &&
+				YDelta < maxPos && YDelta > -maxPos;
+	}
 }
