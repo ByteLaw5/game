@@ -56,7 +56,7 @@ public class Level
 
             int height = (int) (baseHeight + (noise < 0 ? 3 : 15) * noise);
 
-            for (int y = section.getHeight() - 1; y >= 0)
+            for (int y = section.getHeight() - 1; y >= 0; --y)
             {
                 if (y <= height)
                     section.setBlock(x, y, BlockType.EARTH);

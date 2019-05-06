@@ -78,7 +78,7 @@ public class GameBase extends Canvas implements Runnable {
 		this.drawMessage((Graphics2D)this.getGraphics(), "", 0, 0);
 	}
 
-	//TODO byte level system
+	//TODO byte level system (@Valoeghese)
 	private void addLevel(BufferedImage level) {
 		int w = level.getWidth();
 		int h = level.getHeight();

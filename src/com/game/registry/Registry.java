@@ -10,14 +10,14 @@ import java.util.Map;
 
 public class Registry<T>
 {
+    private static final List<String> registry_names = new ArrayList<>();
+
     public static final Registry<BlockType> BLOCK = new Registry<BlockType>("block");
     public static final Registry<GeneratorType> GENERATOR = new Registry<GeneratorType>("generator");
 
     private Map<Integer, T> reg_map = new HashMap<>();
     private Map<T, Integer> reverse_map = new HashMap<>();
     private final String name;
-
-    private static List<String> registry_names = new ArrayList<>();
 
     protected Registry(String name)
     {
