@@ -35,7 +35,7 @@ public class Block extends GameObject implements IHasPlace {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(texture, (int)x, (int)y, null);
+		g.drawImage(texture, (int)x, (int)y, this.getBoundingBox().width, this.getBoundingBox().height, null);
 	}
 
 	@Override
