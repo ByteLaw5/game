@@ -6,13 +6,25 @@ import com.game.GameBase;
 import com.game.util.Assets;
 import com.game.util.ICollision;
 import com.game.util.ID;
+import com.game.util.ISectionLoader;
+import com.game.util.math.MathUtils;
 
-public class Player extends GameObjectLiving implements ICollision {
+public class Player extends GameObjectLiving implements ICollision, ISectionLoader
+{
 	public Player(float x, float y, GameBase game) {
 		super(x, y, ID.Player, game, true);
 		health = getMaxHealth();
 	}
-	
+
+	@Override
+	public boolean shouldSectionLoad(int sectionX)
+	{
+		int currentSection = MathUtils.floor(this.x / 16);
+
+		//Load sections in a distance of 4
+		return MathUtils.abs(sectionX - currentSection) > 4;
+	}
+
 	@Override
 	public void tick() {
 		super.tick();

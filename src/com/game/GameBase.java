@@ -7,13 +7,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import com.game.entity.CommonEntity;
+import com.game.block.BlockType;
 import com.game.entity.ZombieEntity;
 import com.game.listeners.KeyListener;
 import com.game.objects.*;
+import com.game.objects.Block;
 import com.game.util.BufferedImageLoader;
 import com.game.util.ID;
 import com.game.util.IHasPlace;
@@ -50,8 +52,13 @@ public class GameBase extends Canvas implements Runnable {
 	private Camera cam;
 	
 	public static int WIDTH, HEIGHT;
-	
+
+	public static final File RUN_DIR = new File("./run/");
+
 	private void init() {
+
+		RUN_DIR.mkdirs();
+
 		WIDTH = getWidth();
 		HEIGHT = getHeight();
 		
@@ -70,7 +77,8 @@ public class GameBase extends Canvas implements Runnable {
 
 		this.drawMessage((Graphics2D)this.getGraphics(), "", 0, 0);
 	}
-	
+
+	//TODO byte level system
 	private void addLevel(BufferedImage level) {
 		int w = level.getWidth();
 		int h = level.getHeight();
@@ -81,7 +89,7 @@ public class GameBase extends Canvas implements Runnable {
 				int red = (pixel >> 16) & 0xff, green = (pixel >> 8) & 0xff, blue = (pixel) & 0xff;
 				
 				if(red == 255 && green == 255 && blue == 255) {
-					block(new Block(xx * 32, yy * 32, getInstance()));
+					block(new Block(xx * 32, yy * 32, getInstance(), BlockType.EARTH));
 				}
 				if(red == 0 && green == 0 && blue == 255) {
 					Player player = new Player(xx * 32, yy * 32, getInstance());
@@ -97,7 +105,7 @@ public class GameBase extends Canvas implements Runnable {
 				if(red == 255 && green == 100 && blue == 0) {
 					this.addObject(new JumpingCommonEntity(xx * 32, yy * 32, getInstance()));
 				}*/
-				if(red == 0 && green == 255 && blue == 0) block(new Block(xx * 32, yy * 32, getInstance(), false));
+				if(red == 0 && green == 255 && blue == 0) block(new Block(xx * 32, yy * 32, getInstance(), BlockType.EARTH_BACKGROUND));
 			}
 		}
 	}
@@ -186,7 +194,7 @@ public class GameBase extends Canvas implements Runnable {
 		if(index == ID.Player.getId()) {
 			this.addObject(new Player(x, y, getInstance()));
 		} else if(index == ID.Block.getId()) {
-			this.addObject(new Block(x, y, getInstance()));
+			this.addObject(new Block(x, y, getInstance(), BlockType.EARTH));
 		} else if(index == ID.Enemy.getId()) {
 			this.addObject(new ZombieEntity(x, y, getInstance()));
 		}

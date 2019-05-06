@@ -1,7 +1,7 @@
 package com.game.util;
 
 /**
- * Used for things that don't move, but still have place in the world
+ * Used for things that don't move, but still have place in the level
  */
 public interface IHasPlace {
 	/**

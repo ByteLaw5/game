@@ -1,7 +1,7 @@
 package com.game.util;
 
 /**
- * Something that has place in the world AND can move.
+ * Something that has place in the level AND can move.
  */
 public interface IMoveable extends IHasPlace {
 	/**

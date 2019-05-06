@@ -11,7 +11,7 @@ import com.game.util.ID;
 import com.game.util.IHasPlace;
 
 /**
- * Something that appears in the world.
+ * Something that appears in the level.
  */
 public abstract class GameObject implements IHasPlace {
 	protected float x, y;

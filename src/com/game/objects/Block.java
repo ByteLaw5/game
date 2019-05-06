@@ -1,20 +1,26 @@
 package com.game.objects;
 
 import com.game.GameBase;
+import com.game.block.BlockType;
+import com.game.objects.GameObject;
 import com.game.util.Assets;
 import com.game.util.ID;
 import com.game.util.IHasPlace;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Block extends GameObject implements IHasPlace {
-	protected boolean canCollide = true;
-	public Block(float x, float y, GameBase game) {
+	private boolean canCollide;
+	private final BlockType block;
+	private final BufferedImage texture;
+
+	public Block(float x, float y, GameBase game, BlockType blockType)
+	{
 		super(x, y, ID.Block, game);
-	}
-	public Block(float x, float y, GameBase game, boolean collidable) {
-		super(x, y, ID.Block, game);
-		canCollide = collidable;
+		this.block = blockType;
+		canCollide = blockType.isSolid();
+		texture = blockType.getTexture();
 	}
 
 	public boolean getCollidable() {
@@ -29,7 +35,7 @@ public class Block extends GameObject implements IHasPlace {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(getCollidable() ? Assets.block : Assets.block_notcollide, (int)x, (int)y, null);
+		g.drawImage(texture, (int)x, (int)y, null);
 	}
 
 	@Override
