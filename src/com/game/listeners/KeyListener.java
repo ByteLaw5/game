@@ -3,7 +3,7 @@ package com.game.listeners;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import com.game.objects.Player;
+import com.game.entity.Player;
 import com.game.util.IsListener;
 
 @IsListener("key")

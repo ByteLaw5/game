@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import com.game.block.BlockType;
+import com.game.entity.Player;
 import com.game.entity.ZombieEntity;
 import com.game.listeners.KeyListener;
 import com.game.objects.*;

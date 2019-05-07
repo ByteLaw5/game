@@ -2,7 +2,7 @@ package com.game.ai
 
 import com.game.objects.GameObject
 import com.game.objects.GameObjectLiving
-import com.game.objects.Player
+import com.game.entity.Player
 import com.game.util.ID
 
 class EnemyAI: IHasAI {

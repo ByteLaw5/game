@@ -1,6 +1,6 @@
 package com.game;
 
-import com.game.objects.Player;
+import com.game.entity.Player;
 import com.game.util.IHasPlace;
 
 public class Camera implements IHasPlace {
