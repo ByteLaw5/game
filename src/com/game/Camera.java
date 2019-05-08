@@ -12,7 +12,7 @@ public class Camera implements IHasPlace {
 	}
 	
 	public void tick(Player player) {
-		this.setX(-player.getX() + GameBase.WIDTH / 2);
+		this.setX(-player.getX() + (GameBase.WIDTH / 2));
 	}
 	
 	@Override
