@@ -278,12 +278,12 @@ public class GameBase extends Canvas implements Runnable {
 		}
 	}
 
-	public <K> boolean IsKeyListenerInsideList(KeyListener listener, Collection<K> coll) {
-		return listeners.contains(listener);
+	public <K extends java.awt.event.KeyListener, T> boolean IsKeyListenerInsideList(K listener, Collection<T> coll) {
+		return coll.contains(listener);
 	}
 
-	public <K> boolean IsMouseListenerInsideList(MouseListener listener, Collection<K> coll) {
-		return listeners.contains(listener);
+	public <K extends java.awt.event.MouseAdapter, T> boolean IsMouseListenerInsideList(K listener, Collection<T> coll) {
+		return coll.contains(listener);
 	}
 
 	public static class UnregisteredListener extends RuntimeException {
