@@ -1,5 +1,7 @@
 package com.game.item;
 
+import com.game.util.Assets;
+
 import java.awt.image.BufferedImage;
 
 public class StickItem extends Item {
@@ -8,6 +10,6 @@ public class StickItem extends Item {
     }
     @Override
     public BufferedImage getTexture() {
-        return null;
+        return Assets.stick;
     }
 }

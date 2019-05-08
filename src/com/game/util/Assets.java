@@ -18,4 +18,6 @@ public class Assets {
     public static final BufferedImage grass_notcollide = loader.loadImage("/res/textures/blocks/grass0.png");
     public static final BufferedImage stone = loader.loadImage("/res/textures/blocks/stone.png");
     public static final BufferedImage stone_notcollide = loader.loadImage("/res/textures/blocks/stone0.png");
+
+    public static final BufferedImage stick = loader.loadImage("/res/textures/items/stick.png");
 }
