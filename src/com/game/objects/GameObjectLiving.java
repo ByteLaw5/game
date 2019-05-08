@@ -64,7 +64,6 @@ public abstract class GameObjectLiving extends GameObject implements IHealth, IM
 		}
 		if(this.getVelx() < 0F) looks = Direction.LEFT;
 		else if(this.getVelx() > 0F) looks = Direction.RIGHT;
-		System.out.println("GOL_: " + Float.toString(velx));
 	}
 	
 	private void checkHealth() {

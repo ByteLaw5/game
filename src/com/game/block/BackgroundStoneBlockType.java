@@ -6,7 +6,4 @@ public class BackgroundStoneBlockType extends BlockType {
     public BackgroundStoneBlockType() {
         super(Assets.stone_notcollide, false);
     }
-    public void render() {
-
-    }
 }
