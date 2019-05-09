@@ -181,7 +181,7 @@ public class GameBase extends Canvas implements Runnable {
 					BlockType b = section.getBlock(x, y);
 					if (b.isVisible())
 					{
-						addBlock(new Block((x + (16 *sectionX)) * 32, y * 32, getInstance(), b), sectionX);
+						addBlock(new Block((x + (16 * sectionX)) * 32, y * 32, getInstance(), b), sectionX);
 					}
 				}
 			}
@@ -281,7 +281,7 @@ public class GameBase extends Canvas implements Runnable {
 		}
 		//Moved cam.tick out of the loop in an attempt to reduce loop lag.
         //If this is a problem feel free to revert it
-        cam.tick(player);
+		cam.tick(player);
 
 		int playerSection = MathUtils.floor(player.getX() / 512F);
 		for (int i = playerSection - 6; i <= playerSection + 6; ++i)
@@ -300,6 +300,7 @@ public class GameBase extends Canvas implements Runnable {
 		{
 			getSectionList(l.getA()).remove(l.getB());
 		}
+
 		ON_WAIT.clear();
 		TO_REMOVE.clear();
 		SECTION_ON_WAIT.clear();

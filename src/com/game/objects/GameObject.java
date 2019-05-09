@@ -19,7 +19,7 @@ public abstract class GameObject implements IHasPlace {
 	public GameBase game;
 	public int ticks;
 	protected Random rand = new Random();
-	
+
 	public GameObject(float x, float y, ID id, GameBase game) {
 		this.x = x;
 		this.y = y;
