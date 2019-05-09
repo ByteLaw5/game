@@ -102,30 +102,37 @@ public class LevelDataLoader
         Path loc = getSection(file, sectionX);
         File fileloc = loc.toFile();
         LevelSection section = level.getSection(sectionX);
-        try {
-            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(fileloc), 1024));
 
-            for (int x = 0; x < 16; ++x)
+        if (section.getBlock(0, 0) != null)
+        {
+            try
             {
-                for (int y = section.getHeight() - 1; y >= 0; --y)
-                {
-                    int i = Registry.BLOCK.getId(section.getBlock(x, y));
-                    System.out.println(i);
-                    out.writeInt(i);
-                }
-            }
-            
-            out.writeInt(META_END);
+                DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(fileloc), 1024));
 
-            out.flush();
-            out.close();
-        } catch (EOFException e) {
-            e.printStackTrace();
-            System.err.println("Error loading section " + String.valueOf(sectionX) + ": Reached end of file earlier than expected!");
-            throw new SectionLoadError("Error loading section " + String.valueOf(sectionX) + ": Reached end of file earlier than expected!");
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new SectionLoadError("Error loading section " + String.valueOf(sectionX) + ": Unhandled IOException!");
+                for (int x = 0; x < 16; ++x)
+                {
+                    for (int y = section.getHeight() - 1; y >= 0; --y)
+                    {
+                        int i = Registry.BLOCK.getId(section.getBlock(x, y));
+                        System.out.println(i);
+                        out.writeInt(i);
+                    }
+                }
+
+                out.writeInt(META_END);
+
+                out.flush();
+                out.close();
+            } catch (EOFException e)
+            {
+                e.printStackTrace();
+                System.err.println("Error loading section " + String.valueOf(sectionX) + ": Reached end of file earlier than expected!");
+                throw new SectionLoadError("Error loading section " + String.valueOf(sectionX) + ": Reached end of file earlier than expected!");
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                throw new SectionLoadError("Error loading section " + String.valueOf(sectionX) + ": Unhandled IOException!");
+            }
         }
     }
 

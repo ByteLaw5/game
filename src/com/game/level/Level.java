@@ -145,6 +145,8 @@ public class Level implements IWorld
             {
                 if (y <= height)
                     section.setBlock(x, y, BlockType.EARTH);
+                else
+                    section.setBlock(x, y, BlockType.AIR);
             }
 
             current.generate(this, section, sectionX * 16 + x);
