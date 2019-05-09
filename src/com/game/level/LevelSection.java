@@ -5,7 +5,7 @@ import com.game.objects.Block;
 
 import java.util.Arrays;
 
-public class LevelSection
+public class LevelSection implements ReadableSection, IBlockWriter
 {
     private static final int HEIGHT = 128;
 
@@ -18,16 +18,19 @@ public class LevelSection
                 blocks[i][j] = BlockType.AIR;
     }
 
+    @Override
     public BlockType getBlock(int x, int y)
     {
         return blocks[x][y];
     }
 
+    @Override
     public void setBlock(int x, int y, BlockType block)
     {
         blocks[x][y] = block;
     }
 
+    @Override
     public int getHeight()
     {
         return HEIGHT;
