@@ -181,7 +181,7 @@ public class GameBase extends Canvas implements Runnable {
 					BlockType b = section.getBlock(x, y);
 					if (b.isVisible())
 					{
-						addBlock(new Block((x + sectionX) * 32, y * 32, getInstance(), b), sectionX);
+						addBlock(new Block((x + (16 *sectionX)) * 32, y * 32, getInstance(), b), sectionX);
 					}
 				}
 			}
