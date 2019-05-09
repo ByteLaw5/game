@@ -12,7 +12,6 @@ import com.game.ai.JumpAI;
 import com.game.objects.Block;
 import com.game.objects.GameObject;
 import com.game.objects.GameObjectLiving;
-import com.game.objects.Player;
 import com.game.util.ICollision;
 import com.game.util.ID;
 

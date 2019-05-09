@@ -1,6 +1,7 @@
 package com.game.objects;
 
 import com.game.GameBase;
+import com.game.entity.Player;
 import com.game.util.Direction;
 import com.game.util.ICollision;
 import com.game.util.ID;

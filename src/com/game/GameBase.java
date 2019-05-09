@@ -9,19 +9,20 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
+import java.util.List;
 import com.game.block.BlockType;
+import com.game.entity.Player;
 import com.game.entity.ZombieEntity;
-import com.game.level.IBlockReadable;
 import com.game.level.Level;
-import com.game.level.LevelSection;
 import com.game.level.ReadableSection;
 import com.game.level.data.LevelDataLoader;
 import com.game.listeners.KeyListener;
+import com.game.listeners.MouseListener;
 import com.game.objects.*;
 import com.game.objects.Block;
 import com.game.util.*;
@@ -57,6 +58,8 @@ public class GameBase extends Canvas implements Runnable {
 	private File loadedFile = null;
 	private static File staticLoadedFile = null;
 
+	public final List<Object> listeners = new ArrayList<>();
+
 	private GameBase instance;
 	private Player player;
 	
@@ -65,6 +68,9 @@ public class GameBase extends Canvas implements Runnable {
 	private boolean running = false;
 	private Thread thread;
 	private SoundEngine se;
+
+	private KeyListener keyListener;
+	private MouseListener mouseListener;
 	
 	private Camera cam;
 	
@@ -86,8 +92,6 @@ public class GameBase extends Canvas implements Runnable {
 
 		loadLevel("test");
 
-		//level = loader.loadImage("/res/level.png");]
-
 		se = new SoundEngine();
 		se.load();
 		cam = new Camera(0, 0);
@@ -98,9 +102,22 @@ public class GameBase extends Canvas implements Runnable {
 
 		player.setY((loadedLevel.getHeightAtPos(0) + 1) * 32);
 		System.out.println("Player y: " + player.getY());
-		//addLevel(level);
-		
-		this.addKeyListener(new KeyListener(player));
+
+		keyListener = new KeyListener(player);
+		mouseListener = new MouseListener(player);
+
+		this.addKeyListener(keyListener);
+		this.addMouseListener(mouseListener);
+
+		if(IsKeyListenerInsideList(keyListener, listeners) && IsMouseListenerInsideList(mouseListener, listeners)) {
+			for(Object listener : listeners) {
+				if(listener.getClass().getAnnotation(IsListener.class) == null) {
+					throw new UnregisteredListener("Found unregistered listener with name: " + listener.toString());
+				}
+			}
+		} else {
+			throw new UnregisteredListener("The key/mouse or both listeners weren't in the list");
+		}
 
 		this.drawMessage((Graphics2D)this.getGraphics(), "", 0, 0);
 	}
@@ -398,6 +415,26 @@ public class GameBase extends Canvas implements Runnable {
 		private static final long serialVersionUID = 1L;
 
 		public ObjectDoesNotExistException(String cause) {
+			super(cause);
+		}
+	}
+
+	public <K extends java.awt.event.KeyListener, T> boolean IsKeyListenerInsideList(K listener, Collection<T> coll) {
+		return coll.contains(listener);
+	}
+
+	public <K extends java.awt.event.MouseAdapter, T> boolean IsMouseListenerInsideList(K listener, Collection<T> coll) {
+		return coll.contains(listener);
+	}
+
+	public static class UnregisteredListener extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+
+		public UnregisteredListener() {
+			super();
+		}
+
+		public UnregisteredListener(String cause) {
 			super(cause);
 		}
 	}

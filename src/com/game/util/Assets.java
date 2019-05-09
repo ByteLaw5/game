@@ -14,4 +14,10 @@ public class Assets {
     public static final BufferedImage zombie = loader.loadImage("/res/textures/mobs/zombie.png");
     public static final BufferedImage block = loader.loadImage("/res/textures/blocks/dirt.png");
     public static final BufferedImage block_notcollide = loader.loadImage("/res/textures/blocks/dirt0.png");
+    public static final BufferedImage grass = loader.loadImage("/res/textures/blocks/grass.png");
+    public static final BufferedImage grass_notcollide = loader.loadImage("/res/textures/blocks/grass0.png");
+    public static final BufferedImage stone = loader.loadImage("/res/textures/blocks/stone.png");
+    public static final BufferedImage stone_notcollide = loader.loadImage("/res/textures/blocks/stone0.png");
+
+    public static final BufferedImage stick = loader.loadImage("/res/textures/items/stick.png");
 }

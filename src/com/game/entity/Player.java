@@ -1,9 +1,15 @@
-package com.game.objects;
+package com.game.entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import com.game.GameBase;
+import com.game.item.Inventory;
+import com.game.item.ItemStack;
+import com.game.item.StickItem;
+import com.game.objects.Block;
+import com.game.objects.GameObject;
+import com.game.objects.GameObjectLiving;
 import com.game.util.Assets;
 import com.game.util.Direction;
 import com.game.util.ICollision;
@@ -13,6 +19,7 @@ import com.game.util.math.MathUtils;
 
 public class Player extends GameObjectLiving implements ICollision, ISectionLoader
 {
+	public Inventory inv;
 	private boolean goBack = false;
 	private int animIndex = 0;
 	private int animTick = 0;
@@ -21,6 +28,8 @@ public class Player extends GameObjectLiving implements ICollision, ISectionLoad
 	public Player(float x, float y, GameBase game) {
 		super(x, y, ID.Player, game, true);
 		health = getMaxHealth();
+		inv = new Inventory(this);
+		inv.push(new ItemStack(new StickItem(), 10));
 	}
 
 	@Override

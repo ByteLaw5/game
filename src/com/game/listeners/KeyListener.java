@@ -3,7 +3,8 @@ package com.game.listeners;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import com.game.objects.Player;
+import com.game.GameBase;
+import com.game.entity.Player;
 import com.game.util.IsListener;
 
 @IsListener("key")
@@ -23,6 +24,7 @@ public class KeyListener extends KeyAdapter {
 	public KeyListener(Player player) {
 		this.player = player;
 		keysPressed = new boolean[243];
+		player.game.listeners.add(this);
 	}
 	
 	@Override

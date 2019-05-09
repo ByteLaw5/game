@@ -4,6 +4,7 @@ import com.game.GameBase;
 import com.game.ai.AIType;
 import com.game.ai.JumpAI;
 import com.game.entity.CommonEntity;
+import com.game.entity.Player;
 import com.game.util.ID;
 
 @Deprecated public class JumpingCommonEntity extends CommonEntity {
