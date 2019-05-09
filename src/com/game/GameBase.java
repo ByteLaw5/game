@@ -278,8 +278,11 @@ public class GameBase extends Canvas implements Runnable {
 		for(GameObject object : OBJECTS) {
 			object.tick();
 			object.ticks++;
-			cam.tick(player);
 		}
+		//Moved cam.tick out of the loop in an attempt to reduce loop lag.
+        //If this is a problem feel free to revert it
+        cam.tick(player);
+
 		int playerSection = MathUtils.floor(player.getX() / 512F);
 		for (int i = playerSection - 6; i <= playerSection + 6; ++i)
 		{
