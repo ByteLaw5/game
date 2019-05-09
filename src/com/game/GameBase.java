@@ -80,6 +80,8 @@ public class GameBase extends Canvas implements Runnable {
 
 	private void init() {
 		instance = this;
+		BlockType _temp = BlockType.AIR;
+		System.out.println(_temp);
 
 		RUN_DIR.mkdirs();
 
@@ -94,7 +96,7 @@ public class GameBase extends Canvas implements Runnable {
 
 		se = new SoundEngine();
 		se.load();
-		cam = new Camera(0, 0);
+		cam = new Camera(player.getX(), player.getY());
 
 		for (int sectionX = -4; sectionX <= 4; ++sectionX) {
 			loadUnloadSection(sectionX, player);

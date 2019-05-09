@@ -110,7 +110,7 @@ public class LevelDataLoader
                 for (int y = section.getHeight() - 1; y >= 0; --y)
                 {
                     int i = Registry.BLOCK.getId(section.getBlock(x, y));
-
+                    System.out.println(i);
                     out.writeInt(i);
                 }
             }

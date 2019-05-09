@@ -134,7 +134,6 @@ public class Level implements IWorld
 
         GeneratorType next = generatorTypeProvider.getGeneratorAtSection(sectionX + 1);
         GeneratorType current = generatorTypeProvider.getGeneratorAtSection(sectionX);
-
         for (int x = 0; x < 16; ++x)
         {
             double noise = height_generator.eval(sectionX * 16 + x, 0);
