@@ -1,10 +1,13 @@
 package com.game;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.JFrame;
 
 public class Window {
+	public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+	public static final double swidth = SCREEN_SIZE.getWidth(), sheight = SCREEN_SIZE.getHeight();
+
 	public Window(int w, int h, String title, GameBase game) {
 		game.setPreferredSize(new Dimension(w, h));
 		//game.setMaximumSize(new Dimension(w, h));

@@ -1,6 +1,7 @@
 package com.game.objects;
 
 import com.game.GameBase;
+import com.game.Window;
 import com.game.block.BlockType;
 import com.game.objects.GameObject;
 import com.game.util.Assets;
@@ -35,7 +36,7 @@ public class Block extends GameObject implements IHasPlace {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(texture, (int)x, (int)y, this.getBoundingBox().width, this.getBoundingBox().height, null);
+		g.drawImage(texture, (int)x, (int)y, (int)Window.swidth / this.getBoundingBox().width - 10, (int)Window.sheight / this.getBoundingBox().height + 13, null);
 	}
 
 	@Override
