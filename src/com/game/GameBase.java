@@ -267,7 +267,7 @@ public class GameBase extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		new Window(900, 600, "Undead Residence Alpha 0.1v", new GameBase());
+		new Window(900, 600, "Unusual world", new GameBase());
 	}
 	
 	public static class ObjectDoesNotExistException extends IndexOutOfBoundsException {
