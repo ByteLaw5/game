@@ -8,25 +8,36 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
+<<<<<<< HEAD
 import java.nio.file.Paths;
 import java.util.ArrayList;
+=======
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedList;
+<<<<<<< HEAD
 import java.util.Map;
 import java.util.List;
+=======
+
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 import com.game.block.BlockType;
 import com.game.entity.Player;
 import com.game.entity.ZombieEntity;
+<<<<<<< HEAD
 import com.game.level.Level;
 import com.game.level.ReadableSection;
 import com.game.level.data.LevelDataLoader;
+=======
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 import com.game.listeners.KeyListener;
 import com.game.listeners.MouseListener;
 import com.game.objects.*;
 import com.game.objects.Block;
-import com.game.util.*;
-import com.game.util.math.MathUtils;
+import com.game.util.BufferedImageLoader;
+import com.game.util.ID;
+import com.game.util.IHasPlace;
+import com.game.util.SoundEngine;
 
 public class GameBase extends Canvas implements Runnable {
 	private static final long serialVersionUID = -7501386080343782626L;
@@ -47,6 +58,7 @@ public class GameBase extends Canvas implements Runnable {
 	 * A {@link LinkedList} of objects that are waiting to be removed.
 	 */
 	public static final LinkedList<GameObject> TO_REMOVE = new LinkedList<>();
+<<<<<<< HEAD
 	/**
 	 * A {@link Map} of {@link LinkedList} instances representing objects in each section.
 	 * Currently only includes blocks
@@ -61,10 +73,13 @@ public class GameBase extends Canvas implements Runnable {
 
 	public final List<Object> listeners = new ArrayList<>();
 
+=======
+	
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 	private GameBase instance;
 	private Player player;
 	
-	//private BufferedImage level = null;
+	private BufferedImage level = null;
 	
 	private boolean running = false;
 	private Thread thread;
@@ -77,12 +92,15 @@ public class GameBase extends Canvas implements Runnable {
 	
 	public static int WIDTH, HEIGHT;
 
-	public static final File RUN_DIR = new File("./run");
+	public static final File RUN_DIR = new File("./run/");
 
 	private void init() {
+<<<<<<< HEAD
 		instance = this;
 		BlockType _temp = BlockType.AIR;
 		System.out.println(_temp);
+=======
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 
 		RUN_DIR.mkdirs();
 
@@ -90,6 +108,7 @@ public class GameBase extends Canvas implements Runnable {
 		HEIGHT = getHeight();
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
+<<<<<<< HEAD
 
 		player = new Player(0, 0, getInstance());
 
@@ -121,10 +140,24 @@ public class GameBase extends Canvas implements Runnable {
 		} else {
 			throw new UnregisteredListener("The key/mouse or both listeners weren't in the list");
 		}
+=======
+		level = loader.loadImage("/res/level.png");
+		
+		instance = this;
+
+		se = new SoundEngine();
+		se.load();
+		cam = new Camera(0, 0);
+		
+		addLevel(level);
+		
+		this.addKeyListener(new KeyListener(player));
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 
 		this.drawMessage((Graphics2D)this.getGraphics(), "", 0, 0);
 	}
 
+<<<<<<< HEAD
 	private void loadLevel(String levelName)
 	{
 		loadedFile = Paths.get(RUN_DIR.toString() + "/levels/" + levelName).toFile();
@@ -203,6 +236,9 @@ public class GameBase extends Canvas implements Runnable {
 	}
 
 	@Deprecated
+=======
+	//TODO byte level system (@Valoeghese)
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 	private void addLevel(BufferedImage level) {
 		int w = level.getWidth();
 		int h = level.getHeight();
@@ -280,6 +316,7 @@ public class GameBase extends Canvas implements Runnable {
 			object.tick();
 			object.ticks++;
 		}
+<<<<<<< HEAD
 		//Moved cam.tick out of the loop in an attempt to reduce loop lag.
         //If this is a problem feel free to revert it
 		cam.tick(player);
@@ -302,10 +339,12 @@ public class GameBase extends Canvas implements Runnable {
 			getSectionList(l.getA()).remove(l.getB());
 		}
 
+=======
+		OBJECTS.addAll(ON_WAIT);
+		OBJECTS.removeAll(TO_REMOVE);
+>>>>>>> parent of ddd19ba... really buggy code lol pls help
 		ON_WAIT.clear();
 		TO_REMOVE.clear();
-		SECTION_ON_WAIT.clear();
-		SECTION_TO_REMOVE.clear();
 	}
 	
 	private void render() {
@@ -352,34 +391,11 @@ public class GameBase extends Canvas implements Runnable {
 	public void addObjects(Collection<? extends GameObject> block) {
 		ON_WAIT.addAll(block);
 	}
-
-	public void addBlock(Block block, int sectionX)
-	{
-		ON_WAIT.add(block);
-		SECTION_ON_WAIT.add(new Tuple<>(sectionX, block));
-	}
-
-	private LinkedList<GameObject> getSectionList(int sectionX)
-	{
-		if (!SECTION_OBJECTS.containsKey(sectionX))
-			SECTION_OBJECTS.put(sectionX, new LinkedList<>());
-		return SECTION_OBJECTS.get(sectionX);
-	}
-
-	@Deprecated
+	
 	public void block(Block block) {
 		ON_WAIT.add(block);
 	}
-
-	public void removeBlock(Block object, int sectionX) throws ObjectDoesNotExistException {
-		if(OBJECTS.contains(object)) {
-			TO_REMOVE.add(object);
-			SECTION_TO_REMOVE.add(new Tuple<>(sectionX, object));
-		} else {
-			throw new ObjectDoesNotExistException("The requested object to be removed does not exist.");
-		}
-	}
-
+	
 	public void removeObject(GameObject object) throws ObjectDoesNotExistException {
 		if(OBJECTS.contains(object)) {
 			TO_REMOVE.add(object);

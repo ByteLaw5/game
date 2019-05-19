@@ -1,7 +1,5 @@
 package com.game.level.gen;
 
-import com.game.level.IWorld;
-import com.game.level.LevelSection;
 import com.game.registry.Registry;
 
 public abstract class GeneratorType
@@ -11,8 +9,6 @@ public abstract class GeneratorType
 
     private final String name;
     private final int height;
-
-    public abstract void generate(IWorld world, LevelSection section, int x);
 
     protected GeneratorType(int height, String name)
     {

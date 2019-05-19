@@ -35,10 +35,10 @@ public class Player extends GameObjectLiving implements ICollision, ISectionLoad
 	@Override
 	public boolean shouldSectionLoad(int sectionX)
 	{
-		int currentSection = MathUtils.floor(this.x / (16F * 32F));
+		int currentSection = MathUtils.floor(this.x / 16);
 
 		//Load sections in a distance of 4
-		return MathUtils.abs(sectionX - currentSection) < 5;
+		return MathUtils.abs(sectionX - currentSection) > 4;
 	}
 
 	@Override
