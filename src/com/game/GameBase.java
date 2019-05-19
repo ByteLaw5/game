@@ -33,6 +33,7 @@ public class GameBase extends Canvas implements Runnable {
 	/**
 	 * Background colour.
 	 */
+	public static Window FRAME;
 	public static final Color BACKGROUND = new Color(153, 204, 255);
 	/**
 	 * A complete {@link LinkedList} that contains ALL {@link GameObject}s (That implement {@link IHasPlace})
@@ -321,8 +322,12 @@ public class GameBase extends Canvas implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		g2d.translate(cam.getX(), cam.getY());
+		float _x = cam.getX();
+		float _x0 = _x + FRAME.frame.getContentPane().getX();
+		float _y = cam.getY();
+		float _y0 = _y + FRAME.frame.getContentPane().getY();
 		for(GameObject object : OBJECTS) {
-			object.render(g);
+			if(object.getBoundingBox().intersects(_x, _y, _x0, _y0)) object.render(g);
 		}
 		g2d.translate(-cam.getX(), -cam.getY());
 		
@@ -414,7 +419,7 @@ public class GameBase extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		new Window(900, 600, "Undead Residence Alpha 0.1v", new GameBase());
+		FRAME = new Window(900, 600, "Undead Residence Alpha 0.1v", new GameBase());
 	}
 	
 	public static class ObjectDoesNotExistException extends IndexOutOfBoundsException {
