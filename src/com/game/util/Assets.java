@@ -20,4 +20,5 @@ public class Assets {
     public static final BufferedImage stone_notcollide = loader.loadImage("/res/textures/blocks/stone0.png");
 
     public static final BufferedImage stick = loader.loadImage("/res/textures/items/stick.png");
+    public static final BufferedImage empty = loader.loadImage("/res/textures/items/empty.png");
 }

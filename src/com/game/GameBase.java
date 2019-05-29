@@ -1,10 +1,18 @@
 package com.game;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import com.game.block.BlockType;
+import com.game.entity.Player;
+import com.game.entity.ZombieEntity;
+import com.game.item.ItemStack;
+import com.game.item.StickItem;
+import com.game.item.WorldItem;
+import com.game.listeners.KeyListener;
+import com.game.listeners.MouseListener;
+import com.game.objects.Block;
+import com.game.objects.GameObject;
+import com.game.util.*;
+
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,15 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.game.block.BlockType;
-import com.game.entity.Player;
-import com.game.entity.ZombieEntity;
-import com.game.listeners.KeyListener;
-import com.game.listeners.MouseListener;
-import com.game.objects.*;
-import com.game.objects.Block;
-import com.game.util.*;
 
 public class GameBase extends Canvas implements Runnable {
 	private static final long serialVersionUID = -7501386080343782626L;
@@ -102,6 +101,8 @@ public class GameBase extends Canvas implements Runnable {
 	private void addLevel(BufferedImage level) {
 		int w = level.getWidth();
 		int h = level.getHeight();
+
+		addObject(new WorldItem(new ItemStack(new StickItem(), 3), 1000, 100, this));
 		
 		for(int xx = 0; xx < h; xx++) {
 			for(int yy = 0; yy < w; yy++) {
@@ -117,7 +118,7 @@ public class GameBase extends Canvas implements Runnable {
 					this.addObject(player);
 				}
 				if(red == 255 && green == 0 && blue == 0) {
-					this.addObject(new ZombieEntity(xx * 32, yy * 32, getInstance()));
+					//this.addObject(new ZombieEntity(xx * 32, yy * 32, getInstance()));
 				}
 				/*if(red == 255 && green == 0 && blue == 100) {
 					this.addObject(new ShootingCommonEntity(xx * 32, yy * 32, getInstance()));
@@ -176,11 +177,16 @@ public class GameBase extends Canvas implements Runnable {
 			object.tick();
 			object.ticks++;
 			cam.tick(player);
+			if(object instanceof ICollision) {
+				((ICollision)object).checkCollisions();
+			}
 		}
 		OBJECTS.addAll(ON_WAIT);
 		OBJECTS.removeAll(TO_REMOVE);
 		ON_WAIT.clear();
 		TO_REMOVE.clear();
+		WIDTH = getWidth();
+		HEIGHT = getHeight();
 	}
 	
 	private void render() {
@@ -265,9 +271,10 @@ public class GameBase extends Canvas implements Runnable {
 	public Player getPlayer() {
 		return player;
 	}
-	
+
+	public static Window window;
 	public static void main(String[] args) {
-		new Window(900, 600, "Unusual world", new GameBase());
+		window = new Window("Unusual world", new GameBase());
 	}
 	
 	public static class ObjectDoesNotExistException extends IndexOutOfBoundsException {

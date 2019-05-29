@@ -1,17 +1,14 @@
 package com.game.objects;
 
 import com.game.GameBase;
-import com.game.Window;
 import com.game.block.BlockType;
-import com.game.objects.GameObject;
-import com.game.util.Assets;
 import com.game.util.ID;
 import com.game.util.IHasPlace;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Block extends GameObject implements IHasPlace {
+public class Block extends GameObject {
 	private boolean canCollide;
 	private final BlockType block;
 	private final BufferedImage texture;
@@ -34,9 +31,11 @@ public class Block extends GameObject implements IHasPlace {
 	@Override
 	public void tick() {}
 
-	@Override
+    @Override
 	public void render(Graphics g) {
-		g.drawImage(texture, (int)x, (int)y, (int)Window.swidth / this.getBoundingBox().width - 10, (int)Window.sheight / this.getBoundingBox().height + 13, null);
+		g.drawImage(texture, (int)x, (int)y, this.getBoundingBox().width, this.getBoundingBox().height, null);
+		g.setColor(Color.RED);
+		g.fillRect(this.getBoundingBox().x, this.getBoundingBox().y, this.getBoundingBox().width, this.getBoundingBox().height);
 	}
 
 	@Override

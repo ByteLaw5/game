@@ -52,7 +52,7 @@ public class MouseListener extends MouseAdapter implements org.newdawn.slick.Mou
 
     @Override
     public boolean isAcceptingInput() {
-        return false;
+        return true;
     }
 
     @Override

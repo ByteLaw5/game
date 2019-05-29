@@ -46,8 +46,6 @@ public class Bullet extends GameObject implements IMoveable, ICollision {
     public void tick() {
         x += velx;
         y += vely;
-
-        checkCollisions();
     }
 
     @Override

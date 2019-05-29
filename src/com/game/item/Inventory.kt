@@ -44,9 +44,9 @@ class Inventory {
     }
     private companion object {
         fun emptyline(): Array<ItemStack?> = arrayOf(
-            null as? ItemStack, null as? ItemStack, null as? ItemStack,
-            null as? ItemStack, null as? ItemStack, null as? ItemStack,
-            null as? ItemStack, null as? ItemStack, null as? ItemStack,
-            null as? ItemStack)
+            ItemStack.EMPTY as? ItemStack, ItemStack.EMPTY as? ItemStack, ItemStack.EMPTY as? ItemStack,
+            ItemStack.EMPTY as? ItemStack, ItemStack.EMPTY as? ItemStack, ItemStack.EMPTY as? ItemStack,
+            ItemStack.EMPTY as? ItemStack, ItemStack.EMPTY as? ItemStack, ItemStack.EMPTY as? ItemStack,
+            ItemStack.EMPTY as? ItemStack)
     }
 }

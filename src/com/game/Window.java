@@ -5,22 +5,29 @@ import java.awt.*;
 import javax.swing.JFrame;
 
 public class Window {
-	public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-	public static final double swidth = SCREEN_SIZE.getWidth(), sheight = SCREEN_SIZE.getHeight();
+	private final JFrame screen;
 
-	public Window(int w, int h, String title, GameBase game) {
-		game.setPreferredSize(new Dimension(w, h));
-		//game.setMaximumSize(new Dimension(w, h));
-		game.setMinimumSize(new Dimension(w, h));
+	public Window(String title, GameBase game) {
+		game.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+		game.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
+		game.setMinimumSize(Toolkit.getDefaultToolkit().getScreenSize());
 		
 		JFrame frame = new JFrame(title);
 		frame.add(game);
+		frame.setUndecorated(true);
 		frame.pack();
+		frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setResizable(false);
 		frame.setVisible(true);
+
+		screen = frame;
 		
 		game.start();
+	}
+
+	public JFrame getScreen() {
+		return screen;
 	}
 }

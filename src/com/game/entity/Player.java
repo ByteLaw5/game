@@ -2,11 +2,13 @@ package com.game.entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 import com.game.GameBase;
 import com.game.item.Inventory;
 import com.game.item.ItemStack;
 import com.game.item.StickItem;
+import com.game.item.WorldItem;
 import com.game.objects.Block;
 import com.game.objects.GameObject;
 import com.game.objects.GameObjectLiving;
@@ -30,6 +32,7 @@ public class Player extends GameObjectLiving implements ICollision, ISectionLoad
 		health = getMaxHealth();
 		inv = new Inventory(this);
 		inv.push(new ItemStack(new StickItem(), 10));
+		System.out.println(Arrays.deepToString(inv.getItems()));
 	}
 
 	@Override
@@ -44,9 +47,9 @@ public class Player extends GameObjectLiving implements ICollision, ISectionLoad
 	@Override
 	public void tick() {
 		super.tick();
-		checkCollisions();
+
 	}
-	
+
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
@@ -108,6 +111,11 @@ public class Player extends GameObjectLiving implements ICollision, ISectionLoad
 				}
 				if(this.getBoundingBoxLeft().intersects(object.getBoundingBox())) {
 					this.x = object.getX() + 32;
+				}
+			}
+			if(object.getId() == ID.Item) {
+				if(this.getBoundingBox().intersects(object.getBoundingBox())) {
+					((WorldItem)object).pickUp(this);
 				}
 			}
 			/*if(object.getId() == ID.CommonEntity) {

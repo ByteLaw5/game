@@ -8,4 +8,12 @@ class ItemStack {
         this.item = item
         this.stack = stack
     }
+
+    override fun toString(): String {
+        return item.registryName + ":" + stack
+    }
+
+    companion object {
+        val EMPTY: ItemStack = ItemStack(EmptyItem(), 0)
+    }
 }

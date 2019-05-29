@@ -30,7 +30,6 @@ public abstract class CommonEntity extends GameObjectLiving implements ICollisio
 	@Override
 	public void tick() {
 		super.tick();
-		checkCollisions();
 		tickedAI();
 		if(ticksLeft > 0) ticksLeft--;
 	}
