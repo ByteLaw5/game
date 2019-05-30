@@ -11,15 +11,16 @@ import com.game.listeners.MouseListener;
 import com.game.objects.Block;
 import com.game.objects.GameObject;
 import com.game.util.*;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameBase extends Canvas implements Runnable {
 	private static final long serialVersionUID = -7501386080343782626L;
@@ -30,17 +31,17 @@ public class GameBase extends Canvas implements Runnable {
 	/**
 	 * A complete {@link LinkedList} that contains ALL {@link GameObject}s (That implement {@link IHasPlace})
 	 */
-	public static final LinkedList<GameObject> OBJECTS = new LinkedList<>();
+	public static final LinkedList<GameObject> OBJECTS = Lists.newLinkedList();
 	/**
 	 * A {@link LinkedList} of objects that are waiting to be added.
 	 */
-	public static final LinkedList<GameObject> ON_WAIT = new LinkedList<>();
+	public static final LinkedList<GameObject> ON_WAIT = Lists.newLinkedList();
 	/**
 	 * A {@link LinkedList} of objects that are waiting to be removed.
 	 */
-	public static final LinkedList<GameObject> TO_REMOVE = new LinkedList<>();
+	public static final LinkedList<GameObject> TO_REMOVE = Lists.newLinkedList();
 
-	public final List<Object> listeners = new ArrayList<>();
+	public final Set<Class<? extends EventListener>> listeners = Sets.newHashSet();
 	
 	private GameBase instance;
 	private Player player;
@@ -84,14 +85,18 @@ public class GameBase extends Canvas implements Runnable {
 		this.addKeyListener(keyListener);
 		this.addMouseListener(mouseListener);
 
-		if(IsKeyListenerInsideList(keyListener, listeners) && IsMouseListenerInsideList(mouseListener, listeners)) {
-			for(Object listener : listeners) {
-				if(listener.getClass().getAnnotation(IsListener.class) == null) {
-					throw new UnregisteredListener("Found unregistered listener with name: " + listener.toString());
+		List<Class<? extends EventListener>> notAnnotated = Lists.newArrayList();
+		if(listeners.contains(MouseListener.class) && listeners.contains(KeyListener.class)) {
+			for(Class<? extends EventListener> listener : listeners) {
+				if(listener.getAnnotation(IsListener.class) == null) {
+					notAnnotated.add(listener);
 				}
 			}
+			if(notAnnotated.size() > 0) {
+				throw new UnregisteredListener(notAnnotated.size() + notAnnotated.size() > 1 ? "listeners are" : "listener is" + " not annotated.");
+			}
 		} else {
-			throw new UnregisteredListener("The key/mouse or both listeners weren't in the list");
+			throw new UnregisteredListener("At least one listener is not in the list.");
 		}
 
 		this.drawMessage((Graphics2D)this.getGraphics(), "", 0, 0);
@@ -285,12 +290,8 @@ public class GameBase extends Canvas implements Runnable {
 		}
 	}
 
-	private <K extends java.awt.event.KeyListener, T> boolean IsKeyListenerInsideList(K listener, Collection<T> coll) {
-		return coll.contains(listener);
-	}
-
-	private <K extends java.awt.event.MouseAdapter, T> boolean IsMouseListenerInsideList(K listener, Collection<T> coll) {
-		return coll.contains(listener);
+	private <V extends EventListener> boolean isListenerRegistered(Class<? extends V> listener) {
+		return this.listeners.contains(listener);
 	}
 
 	public static class UnregisteredListener extends RuntimeException {

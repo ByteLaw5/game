@@ -114,7 +114,7 @@ public class Player extends GameObjectLiving implements ICollision, ISectionLoad
 				}
 			}
 			if(object.getId() == ID.Item) {
-				if(this.getBoundingBox().intersects(object.getBoundingBox())) {
+				if(this.getBoundingBox().intersects(object.getBoundingBox()) && !((WorldItem)object).getContent().isEmpty()) {
 					((WorldItem)object).pickUp(this);
 				}
 			}

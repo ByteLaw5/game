@@ -19,8 +19,7 @@ class Inventory {
         return stack
     }
     fun push(stack: ItemStack?): Boolean {
-        val slot = nextFreeSlot()
-        if(slot == null) return false
+        val slot = nextFreeSlot() ?: return false
         setItemAt(slot[0], slot[1], stack as ItemStack)
         return true
     }
@@ -32,7 +31,7 @@ class Inventory {
             var row = items[j]
             c@ for(y in 0..row.size) {
                 var column = row[y]
-                if(column == null) {
+                if(column == ItemStack.EMPTY) {
                     a = true
                     i = j
                     e = y

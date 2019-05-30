@@ -61,7 +61,7 @@ public class WorldItem extends GameObject implements ICollision, IMoveable {
         for(GameObject object : GameBase.OBJECTS) {
             if(object.getId() == ID.Block && ((Block)object).getCollidable()) {
                 if(this.getBoundingBoxTop().intersects(object.getBoundingBox())) {
-                    this.y = object.getY() + (this.getBoundingBox().height / 2);
+                    this.y = object.getY() + (this.getBoundingBox().height >> 1);
                     this.vely = 0;
                 }
                 if(this.getBoundingBoxDown().intersects(object.getBoundingBox())) {

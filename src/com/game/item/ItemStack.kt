@@ -13,6 +13,14 @@ class ItemStack {
         return item.registryName + ":" + stack
     }
 
+    fun equals(other: ItemStack): Boolean {
+        return this == other || this.item == other.item && this.stack == other.stack && this.maxStack == other.maxStack
+    }
+
+    fun isEmpty(): Boolean {
+        return this.stack == 0 || this.item is EmptyItem || this.equals(EMPTY)
+    }
+
     companion object {
         val EMPTY: ItemStack = ItemStack(EmptyItem(), 0)
     }

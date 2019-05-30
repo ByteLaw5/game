@@ -12,7 +12,7 @@ public class MouseListener extends MouseAdapter implements org.newdawn.slick.Mou
 
     public MouseListener(Player player) {
         this.player = player;
-        player.game.listeners.add(this);
+        player.game.listeners.add(this.getClass());
     }
 
     @Override

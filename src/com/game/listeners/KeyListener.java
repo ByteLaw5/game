@@ -24,7 +24,7 @@ public class KeyListener extends KeyAdapter {
 	public KeyListener(Player player) {
 		this.player = player;
 		keysPressed = new boolean[243];
-		player.game.listeners.add(this);
+		player.game.listeners.add(this.getClass());
 	}
 	
 	@Override
