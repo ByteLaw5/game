@@ -3,7 +3,7 @@ package com.game;
 import com.game.block.BlockType;
 import com.game.entity.Player;
 import com.game.entity.ZombieEntity;
-import com.game.item.ItemStack;
+import com.game.item.StackedItem;
 import com.game.item.StickItem;
 import com.game.item.WorldItem;
 import com.game.listeners.KeyListener;
@@ -20,7 +20,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GameBase extends Canvas implements Runnable {
 	private static final long serialVersionUID = -7501386080343782626L;
@@ -107,7 +106,7 @@ public class GameBase extends Canvas implements Runnable {
 		int w = level.getWidth();
 		int h = level.getHeight();
 
-		addObject(new WorldItem(new ItemStack(new StickItem(), 3), 1000, 100, this));
+		addObject(new WorldItem(new StackedItem(new StickItem(), 3), 1000, 100, this));
 		
 		for(int xx = 0; xx < h; xx++) {
 			for(int yy = 0; yy < w; yy++) {

@@ -12,12 +12,12 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class WorldItem extends GameObject implements ICollision, IMoveable {
-    private final ItemStack content;
+    private final StackedItem content;
     private float velx, vely;
 
-    public WorldItem(ItemStack itemStack, float x, float y, GameBase game) {
+    public WorldItem(StackedItem stackedItem, float x, float y, GameBase game) {
         super(x, y, ID.Item, game);
-        this.content = itemStack;
+        this.content = stackedItem;
     }
 
     @Override
@@ -102,7 +102,7 @@ public class WorldItem extends GameObject implements ICollision, IMoveable {
         return new Rectangle((int)this.x, (int)this.y + 5, 5, this.getBoundingBox().height - 10);
     }
 
-    public ItemStack getContent() {
+    public StackedItem getContent() {
         return content;
     }
 }

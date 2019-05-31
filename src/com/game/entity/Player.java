@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import com.game.GameBase;
 import com.game.item.Inventory;
-import com.game.item.ItemStack;
+import com.game.item.StackedItem;
 import com.game.item.StickItem;
 import com.game.item.WorldItem;
 import com.game.objects.Block;
@@ -31,7 +31,7 @@ public class Player extends GameObjectLiving implements ICollision, ISectionLoad
 		super(x, y, ID.Player, game, true);
 		health = getMaxHealth();
 		inv = new Inventory(this);
-		inv.push(new ItemStack(new StickItem(), 10));
+		inv.push(new StackedItem(new StickItem(), 10));
 		System.out.println(Arrays.deepToString(inv.getItems()));
 	}
 

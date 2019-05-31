@@ -1,8 +1,8 @@
 package com.game.item
 
-class ItemStack {
-    val item: Item
-    val stack: Int
+class StackedItem {
+    var item: Item
+    var stack: Int
     val maxStack: Int get() = item.maxStack
     constructor(item: Item, stack: Int) {
         this.item = item
@@ -13,7 +13,7 @@ class ItemStack {
         return item.registryName + ":" + stack
     }
 
-    fun equals(other: ItemStack): Boolean {
+    fun equals(other: StackedItem): Boolean {
         return this == other || this.item == other.item && this.stack == other.stack && this.maxStack == other.maxStack
     }
 
@@ -22,6 +22,6 @@ class ItemStack {
     }
 
     companion object {
-        val EMPTY: ItemStack = ItemStack(EmptyItem(), 0)
+        val EMPTY: StackedItem = StackedItem(EmptyItem(), 0)
     }
 }
